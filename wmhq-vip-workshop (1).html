@@ -1,0 +1,2160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WMHQ Bi-Annual VIP Workshop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f2f2f2;
+    --merlot:#7b1d1d;
+    --merlot-deep:#3d0e0e;
+    --merlot-darker:#2a0a0a;
+    --blush:#F2C6D0;
+    --ink:#2A2A2A;
+    --ink-soft:#5a5350;
+    --cream:#EDE8DF;
+    --gold:#C9A96E;
+    --line:#e2ddd8;
+    --card:#ffffff;
+    --dot-influence:#9DB8D2;
+    --dot-visibility:#E2B08C;
+    --dot-cash:#A8C3A0;
+    --dot-sub:#E0A8C0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'DM Sans',Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .serif{font-family:'Cormorant Garamond',Georgia,serif}
+
+  /* ---------- LAYOUT ---------- */
+  .layout{display:flex;min-height:100vh}
+
+  /* ---------- SIDEBAR ---------- */
+  .sidebar{
+    width:268px;flex-shrink:0;
+    background:linear-gradient(170deg,var(--merlot-deep) 0%,var(--merlot-darker) 100%);
+    color:var(--cream);
+    padding:30px 0 24px;
+    position:sticky;top:0;height:100vh;
+    display:flex;flex-direction:column;
+    border-right:1px solid rgba(0,0,0,.3);
+  }
+  .brand{padding:0 26px 22px}
+  .brand h1{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;font-size:22px;letter-spacing:.06em;
+    color:#fff;line-height:1.15;
+  }
+  .brand .tag{
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+    color:rgba(242,198,208,.65);margin-top:7px;
+  }
+  .nav-label{
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+    color:rgba(242,198,208,.45);padding:14px 26px 8px;
+  }
+  .nav{flex:1;overflow-y:auto;padding-bottom:8px}
+  .nav::-webkit-scrollbar{width:5px}
+  .nav::-webkit-scrollbar-thumb{background:rgba(242,198,208,.18);border-radius:4px}
+  .nav-item{
+    display:flex;align-items:center;gap:11px;
+    padding:10px 26px;cursor:pointer;
+    font-size:14px;color:rgba(237,232,223,.78);
+    border-left:2px solid transparent;
+    transition:all .18s ease;
+  }
+  .nav-item:hover{background:rgba(255,255,255,.04);color:#fff}
+  .nav-item.active{
+    background:rgba(123,29,29,.55);
+    border-left:2px solid var(--blush);
+    color:#fff;font-weight:500;
+  }
+  .nav-item .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;background:rgba(242,198,208,.5)}
+  .nav-item .num{
+    font-size:11px;color:rgba(242,198,208,.5);width:18px;flex-shrink:0;
+    font-variant-numeric:tabular-nums;
+  }
+  .progress-wrap{padding:16px 26px 4px;border-top:1px solid rgba(255,255,255,.07);margin-top:6px}
+  .progress-wrap .lbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,198,208,.55);margin-bottom:8px;display:flex;justify-content:space-between}
+  .progress-track{height:5px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--blush),var(--gold));transition:width .4s ease}
+  .saved-state{font-size:11px;color:rgba(242,198,208,.55);padding:12px 26px 0;display:flex;align-items:center;gap:7px}
+  .saved-dot{width:7px;height:7px;border-radius:50%;background:var(--dot-cash)}
+
+  /* ---------- MAIN ---------- */
+  .main{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+  .topbar{
+    display:none;
+  }
+  .content{max-width:880px;width:100%;padding:40px 48px 30px;flex:1;display:flex;flex-direction:column}
+
+  /* ---------- BANNER ---------- */
+  .banner{
+    background:var(--merlot);
+    border-radius:14px;
+    padding:54px 44px;
+    margin-bottom:40px;
+    position:relative;overflow:hidden;
+    box-shadow:0 18px 40px -22px rgba(61,14,14,.55);
+  }
+  .banner::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(120% 140% at 80% 0%,rgba(255,255,255,.06),transparent 55%);
+    pointer-events:none;
+  }
+  .banner .kicker{
+    font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+    color:rgba(242,198,208,.8);margin-bottom:14px;
+  }
+  .banner h2{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;font-size:46px;line-height:1.04;letter-spacing:.01em;
+    color:#f3dede;
+    text-shadow:0 1px 0 rgba(0,0,0,.35),0 2px 3px rgba(0,0,0,.25);
+  }
+  .banner .sub{
+    margin-top:14px;color:rgba(242,198,208,.85);font-size:15px;max-width:520px;
+  }
+  .banner .meta-row{
+    margin-top:22px;display:flex;gap:10px;flex-wrap:wrap;
+  }
+  .meta-pill{
+    background:rgba(0,0,0,.22);border:1px solid rgba(242,198,208,.25);
+    color:var(--cream);font-size:12px;letter-spacing:.04em;
+    padding:7px 15px;border-radius:30px;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  .section{display:none;animation:fade .35s ease;padding-bottom:52px}
+  .section.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .section-head{margin-bottom:6px;display:flex;align-items:center;gap:13px}
+  .section-head .pill-dot{width:11px;height:11px;border-radius:50%}
+  .section-head .eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft)}
+  .section h3{
+    font-family:'Cormorant Garamond',serif;font-weight:600;
+    font-size:40px;line-height:1.08;color:var(--merlot);margin:4px 0 0;
+  }
+  .core-diagnostic{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:22px 24px;margin:24px 0 30px;
+  }
+  .core-diagnostic .lbl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--merlot);margin-bottom:8px;font-weight:700}
+  .core-diagnostic p{font-family:'DM Sans',Arial,sans-serif;font-size:18px;line-height:1.5;color:var(--ink);font-weight:500}
+
+  /* ---------- ACCORDION ---------- */
+  .accordion{border:1px solid var(--line);border-radius:11px;margin-bottom:14px;background:var(--card);overflow:hidden}
+  .acc-head{
+    width:100%;text-align:left;background:none;border:none;cursor:pointer;
+    padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;
+    font-family:inherit;color:var(--ink);
+  }
+  .acc-head .acc-title{font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--merlot)}
+  .acc-head .chev{width:20px;height:20px;flex-shrink:0;transition:transform .25s ease;color:var(--merlot)}
+  .accordion.open .chev{transform:rotate(180deg)}
+  .acc-body{display:none;padding:4px 22px 22px;border-top:1px solid var(--line)}
+  .accordion.open .acc-body{display:block}
+  .acc-q{font-size:13px;color:var(--ink-soft);margin:14px 0 2px;padding-bottom:13px;border-bottom:1px solid var(--line);line-height:1.5}
+  .acc-q b{color:var(--merlot);font-weight:600}
+
+  .output-card{background:#fdf0f3;border:1px solid #f3d4dc;border-radius:13px;padding:8px 22px 22px;margin:22px 0}
+  .output-head{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--merlot);font-weight:700;padding-top:18px}
+  .output-card .q label{font-weight:600}
+  .hint{font-size:11.5px;color:var(--ink-soft);line-height:1.45;margin:-3px 0 7px}
+
+  .q{margin-top:18px}
+  .q label{display:block;font-size:14.5px;color:var(--ink);margin-bottom:8px;font-weight:500;line-height:1.45}
+  textarea,input[type=text],input[type=number],input[type=date],select{
+    width:100%;font-family:inherit;font-size:14px;color:var(--ink);
+    background:#fbfaf9;border:1px solid var(--line);border-radius:8px;
+    padding:11px 13px;resize:vertical;transition:border .15s ease,box-shadow .15s ease;
+  }
+  textarea{min-height:74px;line-height:1.55}
+  textarea:focus,input:focus,select:focus{outline:none;border-color:var(--merlot);box-shadow:0 0 0 3px rgba(242,198,208,.4)}
+  select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237b1d1d' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+
+  /* ---------- CALLOUTS ---------- */
+  .callout{display:flex;gap:13px;padding:15px 18px;border-radius:10px;margin-top:16px;font-size:13.5px;line-height:1.5}
+  .callout .ic{flex-shrink:0;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+  .callout strong{font-weight:700}
+  .callout.doc{background:#fdf4f6;border:1px solid #f3d4dc}
+  .callout.doc .ic{background:var(--blush);color:var(--merlot-deep)}
+  .callout.tool{background:#f6f1ea;border:1px solid #e8ddca}
+  .callout.tool .ic{background:var(--gold);color:#fff}
+
+  /* ---------- SCORE ---------- */
+  .score-block{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:22px 24px;margin-top:22px}
+  .score-block .sb-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px}
+  .score-block .sb-lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--merlot);font-weight:700}
+  .score-val{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:var(--merlot);line-height:1}
+  .score-val span{font-size:18px;color:var(--ink-soft)}
+  input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:6px;background:linear-gradient(90deg,var(--blush),var(--merlot));margin:14px 0 8px;cursor:pointer}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--merlot);box-shadow:0 2px 6px rgba(0,0,0,.2);cursor:pointer}
+  input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--merlot);cursor:pointer}
+  .anchor{font-size:12.5px;color:var(--ink-soft);min-height:18px}
+  .anchor b{color:var(--merlot)}
+
+  .finding{margin-top:20px;padding:16px 20px;background:var(--merlot);border-radius:10px;color:var(--cream)}
+  .finding .fl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--blush);margin-bottom:6px}
+  .finding p{font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;line-height:1.4;color:#f3dede}
+
+  /* ---------- WELCOME ---------- */
+  .lead{font-size:16px;color:var(--ink-soft);max-width:640px;margin-bottom:26px}
+  .model-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:26px 28px;margin-bottom:20px}
+  .model-card .eq{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--merlot);text-align:center;margin:6px 0 14px;line-height:1.3}
+  .model-card .eq small{display:block;font-size:13px;color:var(--ink-soft);font-family:'DM Sans',sans-serif;margin-top:8px;letter-spacing:.04em}
+  .how-list{list-style:none;margin-top:6px}
+  .how-list li{display:flex;gap:12px;padding:9px 0;font-size:14.5px;color:var(--ink);border-bottom:1px solid var(--line)}
+  .how-list li:last-child{border-bottom:none}
+  .how-list .n{width:24px;height:24px;border-radius:50%;background:var(--blush);color:var(--merlot-deep);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+  /* ---------- THE NUMBER ---------- */
+  .num-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+  @media(max-width:560px){.num-grid{grid-template-columns:1fr}}
+  .num-field label{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:8px;display:block}
+  .gap-display{background:var(--merlot);border-radius:14px;padding:34px;text-align:center;color:var(--cream);margin-top:8px}
+  .gap-display .row{display:flex;justify-content:center;gap:36px;flex-wrap:wrap;margin-bottom:20px}
+  .gap-display .row .c .l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,198,208,.7);margin-bottom:6px}
+  .gap-display .row .c .v{font-family:'Cormorant Garamond',serif;font-size:30px;color:#f3dede}
+  .gap-display .number{font-family:'Cormorant Garamond',serif;font-size:60px;color:#fff;line-height:1;margin-top:8px}
+  .gap-display .number-lbl{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--blush);margin-bottom:4px}
+  .gap-note{font-size:13px;color:rgba(242,198,208,.8);margin-top:14px;max-width:420px;margin-left:auto;margin-right:auto}
+
+  /* ---------- VERDICT / FLOORPLAN ---------- */
+  .block-card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:22px 24px;margin-bottom:16px}
+  .block-card .bc-lbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--merlot);font-weight:700;margin-bottom:4px}
+  .block-card .bc-help{font-size:13px;color:var(--ink-soft);margin-bottom:12px}
+
+  /* ---------- EXPORT BTN ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    background:var(--merlot);color:#fff;border:none;cursor:pointer;
+    font-family:inherit;font-size:14px;font-weight:500;letter-spacing:.03em;
+    padding:14px 26px;border-radius:30px;transition:all .18s ease;
+  }
+  .btn:hover{background:var(--merlot-deep);transform:translateY(-1px)}
+  .btn.ghost{background:transparent;color:var(--merlot);border:1px solid var(--merlot)}
+  .btn.ghost:hover{background:rgba(123,29,29,.06);transform:none}
+  .export-foot{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .reset-mini{margin-left:auto;font-size:12px;padding:8px 14px;background:none;border:1px solid var(--line);color:var(--ink-soft);border-radius:30px;cursor:pointer;font-family:inherit;letter-spacing:.02em;transition:all .16s ease}
+  .reset-mini:hover{border-color:#e6cdd4;color:var(--merlot);background:#fff}
+  .reset-mini.armed,.reset-all.armed{background:var(--merlot);color:#fff;border-color:var(--merlot)}
+  .reset-mini.armed:hover{background:var(--merlot-deep);color:#fff}
+
+  .mrr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+  @media(max-width:620px){.mrr-grid{grid-template-columns:1fr 1fr}}
+  .mrr-cell{background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .mrr-l{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:5px}
+  .mrr-v{font-family:'Cormorant Garamond',serif;font-size:23px;color:var(--merlot);line-height:1}
+  .mrr-note{font-size:11.5px;color:var(--ink-soft);line-height:1.45;margin-top:13px}
+  .prio-row{border:1px solid var(--line);border-radius:11px;padding:16px 18px;margin-top:12px;background:var(--bg)}
+  .prio-head{display:flex;align-items:center;gap:12px}
+  .prio-num{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:var(--merlot);border-radius:20px;padding:6px 13px;font-weight:700;flex-shrink:0}
+  .prio-row select{margin:0}
+  .prio-context{font-size:11.5px;color:var(--ink-soft);margin-top:8px;letter-spacing:.02em}
+  .prio-lbl{display:block;font-size:13px;color:var(--ink);margin:13px 0 7px;font-weight:500}
+  .pillar-card{margin-top:14px}
+  .pillar-card-name{font-family:'Cormorant Garamond',serif;font-size:25px;color:var(--merlot);line-height:1.1}
+  .pillar-card-label{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-top:4px}
+  .prio-stack{margin-top:16px;display:flex;flex-direction:column;gap:14px}
+  .prio-block{border:1px solid var(--line);border-radius:11px;padding:16px 18px;background:#fdf8f9}
+  .prio-block .prio-head{flex-wrap:wrap;margin-bottom:14px}
+  .prio-block:not(.p1) .prio-num{background:none;color:var(--merlot);border:1px solid var(--merlot)}
+  .prio-sub{font-size:12px;color:var(--ink-soft)}
+  .prio-flabel{display:block;font-size:12.5px;color:var(--ink);margin-bottom:7px;font-weight:500}
+  .prio-block select,.prio-block textarea,.prio-block input{margin:0;width:100%}
+  .prio-block textarea{min-height:84px}
+  .prio-custom{margin-top:10px}
+  .evt-card{border:1px solid var(--line);border-radius:11px;padding:14px 18px 18px;margin-top:12px;background:var(--bg)}
+  .evt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .evt-field label{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:6px}
+  .evt-field.full{grid-column:1 / -1}
+  .evt-card textarea{min-height:54px}
+  .evt-card input,.evt-card textarea{margin:0}
+  .evt-top{display:flex;justify-content:flex-end;margin-bottom:8px}
+  .evt-del{background:none;border:1px solid var(--line);color:var(--ink-soft);border-radius:8px;width:28px;height:28px;cursor:pointer;font-size:16px;line-height:1;display:flex;align-items:center;justify-content:center;transition:all .16s ease}
+  .evt-del:hover{border-color:#e6cdd4;color:var(--merlot);background:#fff}
+  .add-btn{margin-top:14px;font-size:13px;font-weight:600;font-family:inherit;color:var(--merlot);background:none;border:1px dashed #d8b9bf;border-radius:30px;padding:11px 20px;cursor:pointer;transition:all .16s ease}
+  .add-btn:hover{background:rgba(123,29,29,.05);border-color:var(--merlot)}
+  .evt-total{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:18px;padding-top:15px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-soft)}
+  .evt-total b{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--merlot)}
+  .evt-empty{font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:10px}
+  .tip{position:relative;display:inline-flex;margin-left:6px;vertical-align:middle}
+  .tip-q{width:16px;height:16px;border-radius:50%;border:1px solid var(--merlot);background:none;color:var(--merlot);font-size:10px;font-weight:700;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;font-family:inherit;padding:0}
+  .tip-box{display:none;position:absolute;top:23px;left:-4px;width:300px;max-width:76vw;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 44px -18px rgba(61,14,14,.45);padding:14px 16px;font-size:12px;line-height:1.55;color:var(--ink);z-index:60;text-transform:none;letter-spacing:0;font-weight:400}
+  .tip-box b{color:var(--merlot)}
+  .tip:hover .tip-box,.tip.open .tip-box{display:block}
+  @media(max-width:560px){.evt-grid{grid-template-columns:1fr}.evt-field.full{grid-column:auto}}
+
+  .vd-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:6px 0 22px}
+  .vd-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+  .vd-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .vd-name{font-family:'Cormorant Garamond',serif;font-size:21px;color:var(--merlot);line-height:1.1}
+  .vd-sub{font-size:10px;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase;margin-top:4px}
+  .vd-score{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--ink);line-height:1;flex-shrink:0}
+  .vd-score span{font-size:14px;color:var(--ink-soft)}
+  .vd-bar{height:7px;border-radius:6px;background:var(--cream);margin:15px 0 11px;overflow:hidden}
+  .vd-bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--blush),var(--merlot));transition:width .5s ease}
+  .vd-interp{font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+  .vd-low{display:inline-block;margin-top:11px;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--merlot);background:var(--blush);border-radius:20px;padding:4px 11px;font-weight:700}
+  .vd-scoreline{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:15px}
+  .vd-scoreline b{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--merlot);text-transform:none;letter-spacing:0}
+  .vd-table{width:100%;border-collapse:collapse;margin-top:4px;font-size:13px}
+  .vd-table th{text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;padding:8px 10px;border-bottom:1px solid var(--line)}
+  .vd-table td{padding:11px 10px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:top}
+  .vd-table td:first-child{font-weight:600;color:var(--merlot)}
+  .vd-missing{color:var(--ink-soft);font-style:italic}
+  .vd-validate{margin-top:16px;font-size:13px;line-height:1.5;padding:12px 16px;border-radius:10px;background:#fbf3ee;border:1px solid #efd8cd;color:#8a4b32}
+  .vd-validate.ok{background:#f1f6f0;border-color:#d6e6d2;color:#3f6b46}
+  @media(max-width:600px){.vd-cards{grid-template-columns:1fr}.vd-table{font-size:12px}.vd-table th,.vd-table td{padding:8px 6px}}
+
+  .export-actions{display:flex;gap:12px;flex-wrap:wrap}
+  .page-export{margin-top:30px;border:1px solid var(--line);border-radius:14px;background:var(--card);padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .page-export .pe-text{font-size:13px;color:var(--ink-soft)}
+  .page-export+.export-foot{margin-top:16px}
+  @media(max-width:560px){.page-export{flex-direction:column;align-items:stretch}.page-export .btn{width:100%;justify-content:center}}
+  .export-msg{margin-top:14px;font-size:13px;line-height:1.5}
+  .export-msg.ok{color:#3f6b46}
+  .export-msg.err{color:#a4302a}
+  .btn:disabled{opacity:.6;cursor:default;transform:none}
+  #copyFallback textarea{width:100%;min-height:150px;margin-top:12px;font-size:12px;line-height:1.5}
+  @media(max-width:520px){.export-actions{flex-direction:column}.export-actions .btn{width:100%;justify-content:center}}
+  .gate{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(160deg,var(--merlot-deep),var(--merlot-darker));transition:opacity .35s ease}
+  .gate.hide{opacity:0;pointer-events:none}
+  .gate-card{background:var(--card);border-radius:18px;width:100%;max-width:420px;padding:40px 38px;box-shadow:0 40px 100px -30px rgba(0,0,0,.55);text-align:left}
+  .gate-mark{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--merlot);font-weight:700;margin-bottom:14px}
+  .gate-title{font-size:32px;line-height:1.08;color:var(--ink);margin-bottom:10px}
+  .gate-sub{font-size:14px;color:var(--ink-soft);line-height:1.5;margin-bottom:24px}
+  .gate-label{display:block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--merlot);font-weight:700;margin-bottom:8px}
+  .gate-input{width:100%;font-family:inherit;font-size:15px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:11px;padding:13px 15px;letter-spacing:.04em;transition:border-color .15s ease}
+  .gate-input:focus{outline:none;border-color:var(--merlot)}
+  .gate-input.bad{border-color:#a3201f}
+  .gate-err{font-size:12.5px;color:#a3201f;margin-top:10px;line-height:1.4}
+  .gate-btn{width:100%;justify-content:center;margin-top:20px}
+  @media(max-width:480px){.gate-card{padding:32px 26px}.gate-title{font-size:27px}}
+  .modal-scrim{position:fixed;inset:0;background:rgba(42,10,10,.55);display:none;align-items:center;justify-content:center;z-index:200;padding:20px}
+  .modal-scrim.show{display:flex}
+  .modal-card{background:#fff;border-radius:16px;max-width:440px;width:100%;padding:30px 32px;box-shadow:0 34px 90px -22px rgba(0,0,0,.45)}
+  .modal-title{font-size:25px;color:var(--merlot);margin-bottom:10px;line-height:1.15}
+  .modal-body{font-size:14px;color:var(--ink-soft);line-height:1.55;margin-bottom:24px}
+  .modal-actions{display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap}
+  .btn.danger{background:#a3201f;color:#fff;border:1px solid #a3201f}
+  .btn.danger:hover{background:#8a1a19;transform:none}
+  @media(max-width:520px){.modal-actions{flex-direction:column-reverse}.modal-actions .btn{width:100%;justify-content:center}}
+
+  /* ---------- MOBILE ---------- */
+  .menu-btn{display:none}
+  @media(max-width:880px){
+    .layout{flex-direction:column}
+    .sidebar{position:fixed;left:0;top:0;z-index:50;transform:translateX(-100%);transition:transform .3s ease;width:262px}
+    .sidebar.open{transform:translateX(0)}
+    .topbar{display:flex;align-items:center;justify-content:space-between;background:var(--merlot-deep);color:#fff;padding:14px 18px;position:sticky;top:0;z-index:40}
+    .topbar .tb-brand{font-family:'Cormorant Garamond',serif;font-size:17px;letter-spacing:.05em}
+    .menu-btn{display:inline-flex;background:rgba(255,255,255,.1);border:none;color:#fff;width:40px;height:40px;border-radius:9px;align-items:center;justify-content:center;cursor:pointer}
+    .content{padding:24px 20px 100px}
+    .banner{padding:36px 26px}
+    .banner h2{font-size:34px}
+    .section h3{font-size:32px}
+    .scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:45}
+    .scrim.show{display:block}
+  }
+
+  /* ---------- PRINT / PDF ---------- */
+  #export-view{display:none}
+  @media print{
+    @page{margin:0}
+    .layout,.topbar,.menu-btn,.scrim,.top-actions{display:none !important}
+    body{background:#fff}
+    #export-view{display:block !important}
+    .pv-band{background:var(--merlot);color:#fff;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:48px 50px 42px}
+    .pv-logo{display:flex;flex-direction:column;line-height:.94}
+    .pv-logo .pl-a{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:40px;letter-spacing:.09em;color:#f1e6e2}
+    .pv-logo .pl-b{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:30px;color:#f1e6e2;margin:-3px 0 -1px 2px}
+    .pv-band-right{text-align:right;padding-top:6px}
+    .pv-band-title{font-family:'DM Sans',sans-serif;font-weight:700;font-size:25px;color:#fff;line-height:1.15}
+    .pv-band-date{font-size:14px;color:rgba(242,198,208,.82);margin-top:10px}
+    .pv-doc{padding:34px 50px 72px}
+    .pv-intro{font-size:15px;color:#444;margin-bottom:30px;max-width:580px;line-height:1.5}
+    .pv-section{margin-bottom:26px;page-break-inside:avoid}
+    .pv-section h2{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--merlot);border-bottom:1px solid #ddd;padding-bottom:6px;margin-bottom:12px}
+    .pv-item{margin-bottom:13px;page-break-inside:avoid}
+    .pv-item .pv-q{font-size:12.5px;font-weight:700;color:#2a2a2a;margin-bottom:4px}
+    .pv-item .pv-a{font-size:13px;color:#444;white-space:pre-wrap;border-left:2px solid var(--blush);padding-left:12px;min-height:16px}
+    .pv-item .pv-a.empty{color:#bbb;font-style:italic}
+    .pv-scores{display:flex;gap:24px;flex-wrap:wrap;margin:8px 0}
+    .pv-scores .ps{font-size:13px}.pv-scores .ps b{color:var(--merlot);font-size:20px;font-family:'Cormorant Garamond',serif}
+    .print-footer{position:fixed;bottom:0;left:0;right:0;padding:7px 50px;font-size:7px;line-height:1.45;color:#bcaca7;text-align:center;background:#fff}
+  }
+
+  /* ---------- COMMAND CENTRE ---------- */
+  .banner{background-image:radial-gradient(rgba(255,255,255,.03) 1px,transparent 1px);background-size:5px 5px}
+  .cc-greeting{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;margin-bottom:24px}
+  .cc-greeting h3{font-size:38px}
+  .cc-datechip{text-align:right;border:1px solid var(--line);border-radius:10px;padding:10px 16px;background:var(--card)}
+  .cc-datechip .cc-dc-top{display:block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+  .cc-datechip .cc-dc-date{display:block;font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--merlot);margin-top:2px}
+  .cc-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .cc-stat{background:linear-gradient(160deg,var(--merlot),var(--merlot-deep));border:1px solid rgba(242,198,208,.2);border-radius:12px;padding:18px 20px;position:relative;overflow:hidden;box-shadow:0 14px 30px -20px rgba(61,14,14,.65)}
+  .cc-stat::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blush),transparent)}
+  .cc-stat-l{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(242,198,208,.72);margin-bottom:9px}
+  .cc-stat-v{font-family:'Cormorant Garamond',serif;font-size:32px;color:#fff;line-height:1}
+  @media(max-width:680px){.cc-stats{grid-template-columns:repeat(2,1fr)}}
+
+  .cc-label{display:flex;align-items:center;gap:14px;margin:34px 0 14px}
+  .cc-label span{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--merlot);font-weight:700;white-space:nowrap}
+  .cc-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--merlot),transparent)}
+
+  .cc-tiles{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:680px){.cc-tiles{grid-template-columns:1fr}}
+  .cc-tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;cursor:pointer;transition:all .18s ease}
+  .cc-tile:hover{border-color:var(--merlot);transform:translateY(-2px);box-shadow:0 12px 26px -18px rgba(61,14,14,.5)}
+  .cc-tile-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .cc-tile-name{font-size:22px;color:var(--merlot);display:flex;align-items:center;gap:10px;line-height:1.1}
+  .cc-tile-dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0}
+  .cc-tile-sub{font-size:13px;color:var(--ink-soft);margin-top:6px}
+  .cc-arrow{color:var(--merlot);font-size:18px;opacity:.45;transition:all .18s}
+  .cc-tile:hover .cc-arrow{opacity:1;transform:translateX(3px)}
+  .cc-badge{font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:20px;font-weight:700;white-space:nowrap}
+  .cc-badge.ns{background:#efeae6;color:#8a8076}
+  .cc-badge.ip{background:#fbeede;color:#a9743a}
+  .cc-badge.done{background:#e7f0e4;color:#4f7a44}
+
+  .cc-workspaces{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:680px){.cc-workspaces{grid-template-columns:1fr}}
+  .cc-ws{display:flex;align-items:center;gap:12px;background:linear-gradient(160deg,var(--merlot-deep),var(--merlot-darker));color:var(--cream);border-radius:11px;padding:15px 16px}
+  .cc-ws-dot{width:8px;height:8px;border-radius:50%;background:var(--blush);flex-shrink:0}
+  .cc-ws-name{font-size:14px;font-weight:500;color:#fff}
+  .cc-ws-sub{font-size:11px;color:rgba(242,198,208,.7);margin-top:2px}
+  .cc-ext{margin-left:auto;color:rgba(242,198,208,.55);font-size:16px}
+
+  .cc-timeline{padding:2px 0}
+  .cl-help{font-size:12px;color:var(--ink-soft);line-height:1.45;margin-bottom:12px}
+  .cl-bar{height:6px;background:#ece5e7;border-radius:100px;overflow:hidden;margin-bottom:4px}
+  .cl-bar-fill{height:100%;width:0;background:var(--merlot);border-radius:100px;transition:width .35s ease}
+  .cl-list{margin-top:4px}
+  .cl-item{display:flex;align-items:center;gap:12px;width:100%;padding:12px 2px;border:none;border-bottom:1px solid var(--line);background:none;cursor:pointer;text-align:left;font-family:inherit;transition:opacity .2s ease}
+  .cl-item:last-of-type{border-bottom:none}
+  .cl-box{width:20px;height:20px;border:1.5px solid var(--merlot);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#fff;transition:background .15s ease}
+  .cl-box svg{width:13px;height:13px;stroke:#fff;opacity:0;transition:opacity .15s ease}
+  .cl-name{font-size:13.5px;color:var(--ink);font-weight:500;transition:color .2s ease}
+  .cl-item.done .cl-box{background:var(--merlot)}
+  .cl-item.done .cl-box svg{opacity:1}
+  .cl-item.done{opacity:.72}
+  .cl-item.done .cl-name{text-decoration:line-through;color:var(--ink-soft)}
+  .cl-item:focus-visible{outline:2px solid var(--merlot);outline-offset:2px;border-radius:6px}
+  .cl-success{margin-top:14px;font-size:12.5px;color:#3f6b46;background:#f1f6f0;border:1px solid #d6e6d2;border-radius:10px;padding:11px 14px;font-weight:500}
+  .cc-tl{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+  .cc-tl:last-child{border-bottom:none}
+  .cc-tl-time{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--merlot);font-weight:700;width:42px;flex-shrink:0;padding-top:2px}
+  .cc-tl-text{font-size:13px;color:var(--ink);line-height:1.4}
+
+  .cc-insight{background:#fdf4f6;border:1px solid #f3d4dc;border-left:3px solid var(--gold);border-radius:0 11px 11px 0;padding:20px 24px;margin-top:30px}
+  .cc-insight-l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--merlot);margin-bottom:8px}
+  .cc-insight-q{font-size:24px;font-style:italic;color:var(--ink);line-height:1.3}
+
+  /* ---------- BENTO DASHBOARD ---------- */
+  .bento{display:grid;grid-template-columns:1.12fr 1fr;gap:16px;margin-bottom:16px}
+  @media(max-width:680px){.bento{grid-template-columns:1fr}}
+  .bento-card{position:relative;border-radius:18px;padding:22px 24px;overflow:hidden;border:1px solid var(--line)}
+  .bc-gap,.bc-hold{cursor:pointer;transition:transform .18s ease,box-shadow .18s ease}
+  .bc-gap:hover,.bc-hold:hover{transform:translateY(-2px);box-shadow:0 16px 34px -20px rgba(61,14,14,.5)}
+  .bc-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:14px;position:relative;z-index:1}
+  .bc-shape{position:absolute;border-radius:50%;pointer-events:none;z-index:0}
+
+  .bc-gap{background:linear-gradient(155deg,var(--merlot),var(--merlot-deep));border-color:transparent;color:#fff}
+  .bc-gap .bc-label{color:var(--blush)}
+  .bc-gap .bc-shape{width:170px;height:170px;right:-46px;top:-54px;background:radial-gradient(circle,rgba(242,198,208,.28),transparent 70%)}
+  .bc-gap-num{font-family:'Cormorant Garamond',serif;font-size:50px;line-height:1;color:#fff;position:relative;z-index:1}
+  .bc-gap-sub{display:flex;gap:30px;margin-top:18px;position:relative;z-index:1}
+  .bc-gap-sub span{display:flex;flex-direction:column;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(242,198,208,.75)}
+  .bc-gap-sub em{font-family:'Cormorant Garamond',serif;font-style:normal;font-size:22px;color:#f3dede;margin-bottom:3px}
+
+  .bc-chart{background:#f9dde6}
+  .bc-chart .bc-label{color:var(--merlot)}
+  .bc-bars{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;height:118px}
+  .bc-bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+  .bc-bar .bar{width:100%;max-width:32px;border-radius:7px 7px 0 0;background:linear-gradient(180deg,#a83a48,var(--merlot));transition:height .6s cubic-bezier(.2,.8,.2,1);min-height:5px}
+  .bc-bar .bar.hold{background:linear-gradient(180deg,#d59bae,#8a2233)}
+  .bc-bar .bval{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--merlot);margin-bottom:5px}
+  .bc-bar .blabel{font-size:9px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin-top:7px;text-align:center}
+
+  .bc-ring{background:#f4dbe4}
+  .bc-ring .bc-label{color:var(--merlot)}
+  .bc-ring-wrap{display:flex;align-items:center;gap:18px}
+  .ring{width:86px;height:86px;border-radius:50%;background:conic-gradient(var(--merlot) 0deg,#e7c4d0 0deg);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .6s ease}
+  .ring-inner{width:64px;height:64px;border-radius:50%;background:#f4dbe4;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:23px;color:var(--merlot)}
+  .bc-ring-meta{font-size:13px;color:var(--ink-soft);line-height:1.4}
+  .bc-ring-meta span{font-family:'Cormorant Garamond',serif;font-size:21px;color:var(--merlot);display:block}
+
+  .bc-hold{background:#f4dbe4}
+  .bc-hold .bc-label{color:var(--merlot)}
+  .bc-hold .bc-shape{width:130px;height:130px;right:-34px;bottom:-44px;background:radial-gradient(circle,rgba(123,29,29,.13),transparent 70%)}
+  .bc-hold-num{font-family:'Cormorant Garamond',serif;font-size:42px;color:var(--merlot);line-height:1;position:relative;z-index:1}
+  .bc-hold-sub{font-size:12px;color:var(--ink-soft);margin-top:8px;position:relative;z-index:1}
+
+  .bc-timer{background:linear-gradient(155deg,var(--merlot),var(--merlot-deep));border-color:transparent;color:#fff}
+  .bc-timer .bc-label{color:var(--blush)}
+  .bc-timer .bc-shape{width:180px;height:180px;right:-50px;top:-58px;background:radial-gradient(circle,rgba(242,198,208,.28),transparent 70%)}
+  .bc-timer-num{font-family:'Cormorant Garamond',serif;font-size:52px;line-height:1;color:#fff;position:relative;z-index:1;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+  .bc-timer-sub{font-size:12px;letter-spacing:.05em;color:rgba(242,198,208,.78);margin-top:16px;position:relative;z-index:1}
+  .bc-blank{background:#f3eee7;border:1px solid var(--line);min-height:150px}
+  .home-bar{display:flex;justify-content:flex-end;margin-bottom:14px}
+  .home-logout{display:inline-flex;align-items:center;gap:7px;cursor:pointer;font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--merlot);background:var(--card);border:1px solid var(--line);border-radius:30px;padding:8px 15px;transition:background .15s ease,border-color .15s ease}
+  .home-logout:hover{background:#faf4f5;border-color:#e3b9c2}
+  .home-logout svg{width:14px;height:14px}
+  .time-tag{position:fixed;left:268px;top:50%;transform:translateY(-50%);z-index:45;display:flex;align-items:center;gap:6px;background:var(--merlot);color:#fff;padding:8px 11px 8px 9px;border-radius:0 12px 12px 0;box-shadow:0 10px 24px -10px rgba(61,14,14,.65);font-variant-numeric:tabular-nums;pointer-events:none}
+  .time-tag svg{width:13px;height:13px;color:var(--blush);flex-shrink:0}
+  .time-tag #cc-timer-mini{font-family:'Cormorant Garamond',serif;font-size:15px;line-height:1;letter-spacing:.02em}
+  @media(max-width:880px){.time-tag{display:none}}
+  .rec-card{display:flex;align-items:center;gap:13px;background:#fdf8f9;border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:22px}
+  .rec-icon{width:32px;height:32px;border-radius:9px;background:#fbf4f6;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--merlot)}
+  .rec-icon svg{width:16px;height:16px}
+  .rec-text{font-size:13px;color:var(--ink-soft);line-height:1.5}
+  .rec-text strong{color:var(--merlot);font-weight:700}
+  .ref-card{background:var(--card);display:flex;flex-direction:column}
+  .ref-card .bc-label{color:var(--merlot);margin-bottom:6px}
+  .ref-sub{font-size:12px;color:var(--ink-soft);line-height:1.45;margin-bottom:12px}
+  .ref-list{display:flex;flex-direction:column}
+  .ref-row{display:flex;align-items:center;gap:12px;padding:11px 6px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);border-radius:8px;transition:background .15s ease}
+  .ref-row:last-child{border-bottom:none}
+  .ref-row:hover{background:#faf4f5}
+  .ref-row:active{background:#f3e9ec}
+  .ref-icon{width:30px;height:30px;border-radius:8px;background:#fbf4f6;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--merlot)}
+  .ref-icon svg{width:15px;height:15px}
+  .ref-name{font-size:13.5px;font-weight:500;color:var(--ink);flex:1;min-width:0;line-height:1.3}
+  .ref-arrow{display:flex;flex-shrink:0;color:var(--ink-soft);transition:transform .15s ease,color .15s ease}
+  .ref-arrow svg{width:15px;height:15px}
+  .ref-row:hover .ref-arrow{color:var(--merlot);transform:translate(2px,-2px)}
+
+  .bento-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:0}
+  @media(max-width:680px){.bento-cols{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+  .panel-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+  .panel-head span:first-child{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--merlot);font-weight:700}
+  .panel-head .panel-sub{font-size:11px;color:var(--ink-soft)}
+  .cc-row{display:flex;align-items:center;gap:12px;padding:11px 8px;border-radius:11px;cursor:pointer;transition:background .15s ease}
+  .cc-row:hover{background:#faf6f4}
+  .cc-row .row-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .cc-row .row-text{flex:1;min-width:0}
+  .cc-row .row-name{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--merlot);line-height:1.1}
+  .cc-row .row-sub{font-size:11px;color:var(--ink-soft);margin-top:1px}
+  .cc-row .row-score{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--merlot);width:26px;text-align:right;flex-shrink:0}
+
+  /* ---------- SIDEBAR LINKS ---------- */
+  .side-links{flex:1;padding:8px 16px;display:flex;flex-direction:column;gap:11px}
+  .side-link{display:flex;align-items:center;gap:13px;padding:15px 15px;border-radius:11px;text-decoration:none;color:rgba(237,232,223,.88);border:1px solid rgba(242,198,208,.13);background:rgba(255,255,255,.02);transition:all .2s ease}
+  .side-link:hover{background:rgba(123,29,29,.6);border-color:rgba(242,198,208,.35);transform:translateX(5px)}
+  .sl-dot{width:8px;height:8px;border-radius:50%;background:var(--blush);flex-shrink:0;transition:transform .2s}
+  .side-link:hover .sl-dot{transform:scale(1.35)}
+  .sl-text{display:flex;flex-direction:column;flex:1;min-width:0}
+  .sl-name{font-size:14px;font-weight:500;letter-spacing:.02em;color:#fff}
+  .sl-sub{font-size:11px;color:rgba(242,198,208,.6);margin-top:2px;transition:color .2s}
+  .side-link:hover .sl-sub{color:rgba(242,198,208,.9)}
+  .sl-arrow{margin-left:auto;font-size:15px;color:rgba(242,198,208,.5);transition:transform .2s,color .2s}
+  .side-link:hover .sl-arrow{color:#fff;transform:translate(3px,-3px)}
+
+  /* ---------- TOP ACTIONS ---------- */
+  .top-actions{position:fixed;top:22px;right:28px;z-index:44;display:flex;gap:10px}
+  .ta-btn{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.02em;padding:10px 18px;border-radius:30px;transition:all .18s ease;box-shadow:0 10px 26px -12px rgba(61,14,14,.5)}
+  .ta-export{background:var(--merlot);color:#fff;border:1px solid rgba(242,198,208,.55);display:none}
+  .ta-export.show{display:inline-flex}
+  .ta-export:hover{background:var(--merlot-deep);transform:translateY(-1px)}
+  .ta-return{background:#fff;color:var(--merlot);border:1px solid #e6cdd4;display:none}
+  .ta-return:hover{background:var(--blush);color:var(--merlot-deep);transform:translateY(-1px)}
+  .ta-return.show{display:inline-flex}
+  @media(max-width:880px){.top-actions{top:9px;right:12px;gap:7px}.ta-btn{padding:9px 11px}.ta-btn .rb-label{display:none}}
+
+  /* ---------- IP DISCLAIMER ---------- */
+  .ip-disclaimer{margin-top:auto;padding:30px 0 6px;border-top:1px solid var(--line);font-size:10px;line-height:1.55;letter-spacing:.01em;color:rgba(42,42,42,.38);text-align:center}
+  .site-footer{padding:14px 0 4px;text-align:center;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--merlot)}
+  .site-footer .sf-sep{color:var(--ink-soft);font-weight:400;margin:0 6px}
+</style>
+</head>
+<body>
+
+<!-- ACCESS GATE -->
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="gate-mark">Woman Mastery HQ</div>
+    <h1 class="gate-title serif">Bi-Annual VIP Workshop</h1>
+    <p class="gate-sub">Enter your access code to open your six-month review and plan.</p>
+    <label class="gate-label" for="gate-code">Access code</label>
+    <input id="gate-code" class="gate-input" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter your code" onkeydown="gateKey(event)" aria-describedby="gate-err">
+    <div class="gate-err" id="gate-err" role="alert" hidden>That access code is not correct. Please try again.</div>
+    <button class="btn gate-btn" onclick="unlockGate()">Enter workshop
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- MOBILE TOPBAR -->
+<div class="topbar">
+  <button class="menu-btn" onclick="toggleMenu()" aria-label="Menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+  <span class="tb-brand">Bi-Annual VIP Workshop</span>
+  <span style="width:40px"></span>
+</div>
+<div class="scrim" onclick="toggleMenu()"></div>
+
+<div class="top-actions">
+  <button id="returnBtn" class="ta-btn ta-return" onclick="go('welcome')">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
+    <span class="rb-label">Return to dashboard</span>
+  </button>
+</div>
+
+<div class="time-tag" id="cc-mini" title="Time remaining" aria-hidden="true">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+  <span id="cc-timer-mini">04:00:00</span>
+</div>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <h1 class="serif">Woman Mastery HQ</h1>
+      <div class="tag">Bi-Annual VIP Workshop</div>
+    </div>
+    <div class="nav-label">Workspace</div>
+    <nav class="side-links">
+      <a class="side-link" href="https://jessicapinili.com/login" target="_blank" rel="noopener">
+        <span class="sl-dot"></span>
+        <span class="sl-text"><span class="sl-name">WMHQ Login</span><span class="sl-sub">Vault + Community</span></span>
+        <span class="sl-arrow">&#8599;</span>
+      </a>
+      <a class="side-link" href="https://womanmasteryhqportal.com" target="_blank" rel="noopener">
+        <span class="sl-dot"></span>
+        <span class="sl-text"><span class="sl-name">WMHQ Personal Portal</span><span class="sl-sub">Business + Subconscious Data</span></span>
+        <span class="sl-arrow">&#8599;</span>
+      </a>
+      <a class="side-link" href="https://tools.womanmasteryhqportal.com/" target="_blank" rel="noopener">
+        <span class="sl-dot"></span>
+        <span class="sl-text"><span class="sl-name">WMHQ Tools</span><span class="sl-sub">Tools + Calculators</span></span>
+        <span class="sl-arrow">&#8599;</span>
+      </a>
+    </nav>
+    <div class="saved-state"><span class="saved-dot"></span><span id="savedText">All changes saved</span></div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="content">
+      <!-- BANNER -->
+      <div class="banner">
+        <div class="kicker">Woman Mastery HQ</div>
+        <h2 class="serif">Bi-Annual VIP Workshop</h2>
+        <p class="sub">A full strategic audit of the last six months and the architecture of the next.</p>
+        <div class="meta-row">
+          <span class="meta-pill">June 25, 2026</span>
+          <span class="meta-pill">Live, 4 hours</span>
+          <span class="meta-pill">Saves automatically</span>
+        </div>
+      </div>
+
+      <!-- ============ WELCOME / COMMAND CENTRE ============ -->
+      <section class="section active" data-section="welcome">
+        <div class="home-bar">
+          <button class="home-logout" onclick="logout()" aria-label="Log out of the workshop">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+            Log out
+          </button>
+        </div>
+        <div class="rec-card">
+          <span class="rec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>
+          <div class="rec-text"><strong>Recommendation:</strong> Create a new Google Folder or new folder on your desktop to save all resources into.</div>
+        </div>
+        <div class="bento">
+          <div class="bento-card bc-timer">
+            <div class="bc-shape"></div>
+            <div class="bc-label">Time remaining</div>
+            <div class="bc-timer-num" id="cc-timer">04:00:00</div>
+            <div class="bc-timer-sub" id="cc-timer-sub">Begins 4:00 PM Brisbane, June 25</div>
+          </div>
+          <div class="bento-card bc-ring">
+            <div class="bc-label">Completion</div>
+            <div class="bc-ring-wrap">
+              <div class="ring" id="cc-ring"><div class="ring-inner"><span id="cc-pct">0%</span></div></div>
+              <div class="bc-ring-meta"><span id="cc-scored">0 / 4</span> pillars scored</div>
+            </div>
+          </div>
+          <div class="bento-card ref-card">
+            <div class="bc-label">WMHQ suggested tools</div>
+            <div class="ref-sub">Use these tools while completing your workshop plan.</div>
+            <div class="ref-list">
+              <!-- TODO: replace href with the specific Conversion Calculator URL once assigned; currently points to the WMHQ Tools hub -->
+              <a class="ref-row" href="https://tools.womanmasteryhqportal.com/" target="_blank" rel="noopener">
+                <span class="ref-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h2M8 14h2M8 18h2M14 10h2v8h-2z"/></svg></span>
+                <span class="ref-name">Conversion Calculator</span>
+                <span class="ref-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span>
+              </a>
+              <!-- TODO: replace href with the specific I.L.N Calculator URL once assigned; currently points to the WMHQ Tools hub -->
+              <a class="ref-row" href="https://tools.womanmasteryhqportal.com/" target="_blank" rel="noopener">
+                <span class="ref-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h2M8 14h2M8 18h2M14 10h2v8h-2z"/></svg></span>
+                <span class="ref-name">I.L.N Calculator</span>
+                <span class="ref-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span>
+              </a>
+              <!-- TODO: replace href with the specific Offer Generator URL once assigned; currently points to the WMHQ Tools hub -->
+              <a class="ref-row" href="https://tools.womanmasteryhqportal.com/" target="_blank" rel="noopener">
+                <span class="ref-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h2M8 14h2M8 18h2M14 10h2v8h-2z"/></svg></span>
+                <span class="ref-name">Offer Generator</span>
+                <span class="ref-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span>
+              </a>
+            </div>
+          </div>
+          <div class="bento-card ref-card">
+            <div class="bc-label">WMHQ Personal Portal reference</div>
+            <div class="ref-sub">Reference these areas inside your Personal Portal as you complete the plan.</div>
+            <div class="ref-list">
+              <!-- Direct section links not available; each row opens the main WMHQ Personal Portal -->
+              <a class="ref-row" href="https://womanmasteryhqportal.com" target="_blank" rel="noopener">
+                <span class="ref-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>
+                <span class="ref-name">One-Liners / Offer Suite</span>
+                <span class="ref-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span>
+              </a>
+              <a class="ref-row" href="https://womanmasteryhqportal.com" target="_blank" rel="noopener">
+                <span class="ref-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>
+                <span class="ref-name">Revenue Events</span>
+                <span class="ref-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span>
+              </a>
+              <a class="ref-row" href="https://womanmasteryhqportal.com" target="_blank" rel="noopener">
+                <span class="ref-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>
+                <span class="ref-name">Launch Events</span>
+                <span class="ref-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span>
+              </a>
+              <a class="ref-row" href="https://womanmasteryhqportal.com" target="_blank" rel="noopener">
+                <span class="ref-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>
+                <span class="ref-name">Identity Maps</span>
+                <span class="ref-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-cols">
+          <div class="panel">
+            <div class="panel-head"><span>The audit</span><span class="panel-sub">4 pillars</span></div>
+            <div id="cc-pillar-list"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><span>Your workshop progress</span><span class="panel-sub" id="cl-count">0 of 7 complete</span></div>
+            <div class="cl-help">Tick each section as you complete it. You can untick any item if you need to return and revise it.</div>
+            <div class="cl-bar"><div class="cl-bar-fill" id="cl-bar-fill"></div></div>
+            <div id="cc-checklist" class="cl-list" role="group" aria-label="Workshop completion checklist"></div>
+            <div class="cl-success" id="cl-success" hidden>Your full six-month reset is complete.</div>
+          </div>
+        </div>
+
+        <div class="cc-label"><span>The build</span></div>
+        <div class="cc-tiles">
+          <div class="cc-tile" onclick="go('number')"><div class="cc-tile-top"><span class="cc-tile-name serif">The Number</span><span class="cc-arrow">&rarr;</span></div><div class="cc-tile-sub">Calculate your Capacity Gap in dollars</div></div>
+          <div class="cc-tile" onclick="go('verdict')"><div class="cc-tile-top"><span class="cc-tile-name serif">The Verdict</span><span class="cc-arrow">&rarr;</span></div><div class="cc-tile-sub">Four pillar scores and eight decisions</div></div>
+          <div class="cc-tile" onclick="go('floorplan')"><div class="cc-tile-top"><span class="cc-tile-name serif">6-Month Plan</span><span class="cc-arrow">&rarr;</span></div><div class="cc-tile-sub">The deliverable you leave with</div></div>
+          <div class="cc-tile" onclick="go('export')"><div class="cc-tile-top"><span class="cc-tile-name serif">Export</span><span class="cc-arrow">&rarr;</span></div><div class="cc-tile-sub">Your branded PDF</div></div>
+        </div>
+
+        <button class="btn" style="margin-top:28px" onclick="go('influence')">Begin the audit
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </section>
+
+      <!-- ============ INFLUENCE ============ -->
+      <section class="section" data-section="influence">
+        <div class="section-head"><span class="pill-dot" style="background:var(--dot-influence)"></span><span class="eyebrow">Pillar One &middot; Messaging and Positioning</span></div>
+        <h3 class="serif">Influence</h3>
+        <div class="core-diagnostic"><div class="lbl">The core diagnostic</div><p>Does the right person understand and want what you sell within seconds, or are you over-explaining to people who were never going to buy?</p></div>
+
+        <div class="accordion open">
+          <button class="acc-head" onclick="toggleAcc(this)"><span class="acc-title">Review &middot; What happened</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="acc-body">
+            <div class="acc-q">Answers: <b>which messages moved people toward buying, and which merely generated agreement?</b></div>
+            <div class="q"><label>The three messages or pieces of content that drove enquiries or sales:</label><textarea data-field="inf-rev-moved"></textarea></div>
+            <div class="q"><label>The three that got attention but created no commercial action:</label><textarea data-field="inf-rev-agree"></textarea></div>
+            <div class="q"><label>The offer you promoted most over the last six months:</label><textarea data-field="inf-rev-offer"></textarea></div>
+            <div class="q"><label>The exact language buyers used before purchasing:</label><textarea data-field="inf-rev-words"></textarea></div>
+          </div>
+        </div>
+        <div class="accordion">
+          <button class="acc-head" onclick="toggleAcc(this)"><span class="acc-title">Audit &middot; What exists now</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="acc-body">
+            <div class="acc-q">Answers: <b>is the message clear, commercially relevant and differentiated?</b></div>
+            <div class="q"><label>Can someone understand who you help, what you solve and what changes within seconds? Where does it break?</label><textarea data-field="inf-aud-clear"></textarea></div>
+            <div class="q"><label>What do you want to be known for, and does recent content consistently prove it?</label><textarea data-field="inf-aud-known"></textarea></div>
+            <div class="q"><label>What core belief must the buyer adopt before purchasing?</label><textarea data-field="inf-aud-belief"></textarea></div>
+            <div class="q"><label>What makes your approach meaningfully different?</label><textarea data-field="inf-aud-diff"></textarea></div>
+          </div>
+        </div>
+        <div class="accordion">
+          <button class="acc-head" onclick="toggleAcc(this)"><span class="acc-title">Analysis &middot; Constraint and decision</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="acc-body">
+            <div class="acc-q">Choose <b>one</b> primary constraint, then make the decision.</div>
+            <div class="q"><label>My primary Influence constraint is:</label>
+              <select data-field="inf-constraint">
+                <option value="">Select your primary constraint</option>
+                <option>People do not understand the offer</option>
+                <option>People understand it but do not see urgency</option>
+                <option>People want the result but do not see why this approach is different</option>
+                <option>People are interested but do not have enough proof</option>
+                <option>The messaging attracts peers or passive followers instead of buyers</option>
+                <option>The message changes too frequently to become recognised</option>
+              </select>
+            </div>
+            <div class="q"><label>The message I need to strengthen:</label><textarea data-field="inf-an-strengthen"></textarea></div>
+            <div class="q"><label>The message I need to stop diluting the business with:</label><textarea data-field="inf-an-stop"></textarea></div>
+          </div>
+        </div>
+
+        <div class="output-card">
+          <div class="output-head">Required output &middot; what you leave with</div>
+          <div class="q"><label>One positioning statement</label><textarea data-field="inf-out-positioning"></textarea></div>
+          <div class="q"><label>One primary buyer problem</label><input type="text" data-field="inf-out-problem"></div>
+          <div class="q"><label>One core belief</label><input type="text" data-field="inf-out-belief"></div>
+          <div class="q"><label>Three messages to repeat</label><textarea data-field="inf-out-messages"></textarea></div>
+          <div class="q"><label>One messaging pattern to stop</label><input type="text" data-field="inf-out-stop"></div>
+        </div>
+
+
+        <div class="score-block">
+          <div class="sb-top"><span class="sb-lbl">Influence Score</span><span class="score-val"><span id="sv-influence-d">5</span><span>/10</span></span></div>
+          <input type="range" min="1" max="10" value="5" data-field="score-influence" data-anchor="influence" oninput="onScore(this)">
+          <div class="anchor" id="anchor-influence"></div>
+        </div>
+        <div class="page-export"><div class="pe-text">Download this completed section as a standalone PDF.</div><button class="btn" id="pe-influence" onclick="exportSection('influence')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Export Influence to PDF</button></div>
+        <div class="export-foot"><button class="btn ghost" onclick="go('welcome')">Back</button><button class="btn" onclick="go('visibility')">Next: Visibility</button><button class="reset-mini" onclick="resetPage('influence',this)">Reset page</button></div>
+      </section>
+
+      <!-- ============ VISIBILITY ============ -->
+      <section class="section" data-section="visibility">
+        <div class="section-head"><span class="pill-dot" style="background:var(--dot-visibility)"></span><span class="eyebrow">Pillar Two &middot; Content and Marketing</span></div>
+        <h3 class="serif">Visibility</h3>
+        <div class="core-diagnostic"><div class="lbl">The core diagnostic</div><p>Is your visibility building an asset that compounds demand, or a treadmill that resets the moment you stop performing?</p></div>
+
+        <div class="accordion open">
+          <button class="acc-head" onclick="toggleAcc(this)"><span class="acc-title">Review &middot; What happened</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="acc-body">
+            <div class="acc-q">Answers: <b>what created attention, what created demand, and what continued producing value?</b></div>
+            <div class="q"><label>Top three pieces of content by reach:</label><textarea data-field="vis-rev-reach"></textarea></div>
+            <div class="q"><label>Top three pieces by leads, enquiries or sales:</label><textarea data-field="vis-rev-leads"></textarea></div>
+            <div class="q"><label>Current posting frequency and primary platforms:</label><textarea data-field="vis-rev-freq"></textarea></div>
+            <div class="q"><label>What stopped when you became busy, tired or inconsistent:</label><textarea data-field="vis-rev-stopped"></textarea></div>
+            <div class="q"><label>What content continued working after it was published:</label><textarea data-field="vis-rev-continued"></textarea></div>
+          </div>
+        </div>
+        <div class="accordion">
+          <button class="acc-head" onclick="toggleAcc(this)"><span class="acc-title">Audit &middot; What exists now</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="acc-body">
+            <div class="acc-q">Answers: <b>is visibility functioning as a system, or does it depend on constant personal effort?</b></div>
+            <div class="q"><label>Does each platform have a specific commercial role?</label><textarea data-field="vis-aud-role"></textarea></div>
+            <div class="q"><label>Is there a clear pathway from content to lead or sale?</label><textarea data-field="vis-aud-path"></textarea></div>
+            <div class="q"><label>Do you have enough content across discovery, authority, proof, decision and conversion?</label><textarea data-field="vis-aud-coverage"></textarea></div>
+            <div class="q"><label>Does your content process survive a difficult week?</label><textarea data-field="vis-aud-pressure"></textarea></div>
+            <div class="q"><label>Are you moving people into an owned channel such as email or community?</label><textarea data-field="vis-aud-owned"></textarea></div>
+          </div>
+        </div>
+        <div class="accordion">
+          <button class="acc-head" onclick="toggleAcc(this)"><span class="acc-title">Analysis &middot; Constraint and decision</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="acc-body">
+            <div class="acc-q">Choose <b>one</b> primary constraint, then make the decision.</div>
+            <div class="q"><label>My primary Visibility constraint is:</label>
+              <select data-field="vis-constraint">
+                <option value="">Select your primary constraint</option>
+                <option>Not enough qualified people see the content</option>
+                <option>The content gets reach but attracts the wrong people</option>
+                <option>People engage but do not develop buying intent</option>
+                <option>Demand exists but the next step is unclear</option>
+                <option>Content does not connect naturally to the offer</option>
+                <option>The content system collapses under pressure</option>
+                <option>The strategy requires too much output</option>
+                <option>The business is too dependent on one platform</option>
+              </select>
+            </div>
+            <div class="q"><label>The weakest stage between content and sale is:</label><textarea data-field="vis-an-weakest"></textarea></div>
+            <div class="q"><label>The system I need to build or simplify is:</label><textarea data-field="vis-an-system"></textarea></div>
+          </div>
+        </div>
+
+        <div class="output-card">
+          <div class="output-head">Required output &middot; what you leave with</div>
+          <div class="q"><label>One primary platform</label><input type="text" data-field="vis-out-platform"></div>
+          <div class="q"><label>One owned channel</label><input type="text" data-field="vis-out-owned"></div>
+          <div class="q"><label>One content-to-sale pathway</label><textarea data-field="vis-out-pathway"></textarea></div>
+          <div class="q"><label>Three repeatable content series</label><textarea data-field="vis-out-series"></textarea></div>
+          <div class="q"><label>One minimum viable weekly content plan</label><textarea data-field="vis-out-plan"></textarea></div>
+          <div class="q"><label>One commercial metric to track</label><input type="text" data-field="vis-out-metric"></div>
+        </div>
+
+
+        <div class="score-block">
+          <div class="sb-top"><span class="sb-lbl">Visibility Score</span><span class="score-val"><span id="sv-visibility-d">5</span><span>/10</span></span></div>
+          <input type="range" min="1" max="10" value="5" data-field="score-visibility" data-anchor="visibility" oninput="onScore(this)">
+          <div class="anchor" id="anchor-visibility"></div>
+        </div>
+        <div class="page-export"><div class="pe-text">Download this completed section as a standalone PDF.</div><button class="btn" id="pe-visibility" onclick="exportSection('visibility')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Export Visibility to PDF</button></div>
+        <div class="export-foot"><button class="btn ghost" onclick="go('influence')">Back</button><button class="btn" onclick="go('cash')">Next: Cash</button><button class="reset-mini" onclick="resetPage('visibility',this)">Reset page</button></div>
+      </section>
+
+      <!-- ============ CASH ============ -->
+      <section class="section" data-section="cash">
+        <div class="section-head"><span class="pill-dot" style="background:var(--dot-cash)"></span><span class="eyebrow">Pillar Three &middot; Sales and Business Ecosystem</span></div>
+        <h3 class="serif">Cash</h3>
+        <div class="core-diagnostic"><div class="lbl">The core diagnostic</div><p>Does money come from a system that runs whether or not you are performing, or from sprints of pressure you manufacture each time?</p></div>
+
+        <div class="accordion open">
+          <button class="acc-head" onclick="toggleAcc(this)"><span class="acc-title">Review &middot; What happened</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="acc-body">
+            <div class="acc-q">Answers: <b>where did the money actually come from, and was it repeatable?</b></div>
+            <div class="q"><label>Revenue from the last six months, by month:</label><textarea data-field="cash-rev-month"></textarea></div>
+            <div class="q"><label>Revenue by offer:</label><textarea data-field="cash-rev-offer"></textarea></div>
+            <div class="q"><label>Which sales mechanism produced each sale:</label><textarea data-field="cash-rev-mech"></textarea></div>
+            <div class="q"><label>How much revenue was recurring versus newly generated:</label><textarea data-field="cash-rev-recurring"></textarea></div>
+            <div class="q"><label>Which offer produced the best return relative to delivery and sales effort:</label><textarea data-field="cash-rev-best"></textarea></div>
+            <div class="q"><label>Which launch, campaign or offer underperformed:</label><textarea data-field="cash-rev-under"></textarea></div>
+          </div>
+        </div>
+        <div class="accordion">
+          <button class="acc-head" onclick="toggleAcc(this)"><span class="acc-title">Audit &middot; What exists now</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="acc-body">
+            <div class="acc-q">Answers: <b>does the current offer and sales ecosystem mathematically support the next six-month goal?</b></div>
+            <div class="q"><label>What is your core offer?</label><textarea data-field="cash-aud-core"></textarea></div>
+            <div class="q"><label>Does every other offer have a clear role around it?</label><textarea data-field="cash-aud-roles"></textarea></div>
+            <div class="q"><label>How does someone move from lead to buyer, and where is the largest drop-off?</label><textarea data-field="cash-aud-path"></textarea></div>
+            <div class="q"><label>How many sales and leads are required to reach the next revenue goal?</label><textarea data-field="cash-aud-math"></textarea></div>
+            <div class="q"><label>What revenue continues if you stop launching next month?</label><textarea data-field="cash-aud-recurring"></textarea></div>
+            <div class="q"><label>Can delivery support the revenue target?</label><textarea data-field="cash-aud-delivery"></textarea></div>
+          </div>
+        </div>
+        <div class="accordion">
+          <button class="acc-head" onclick="toggleAcc(this)"><span class="acc-title">Analysis &middot; Constraint and decision</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="acc-body">
+            <div class="acc-q">Choose <b>one</b> primary constraint, then make the decision.</div>
+            <div class="q"><label>My primary Cash constraint is:</label>
+              <select data-field="cash-constraint">
+                <option value="">Select your primary constraint</option>
+                <option>Insufficient lead volume</option>
+                <option>Low-quality leads</option>
+                <option>Weak offer demand</option>
+                <option>Weak conversion</option>
+                <option>Founder-dependent selling</option>
+                <option>Launch dependence</option>
+                <option>Random or competing offers</option>
+                <option>Pricing and value mismatch</option>
+                <option>Low recurring revenue</option>
+                <option>Poor retention</option>
+                <option>Delivery capacity</option>
+                <option>Revenue leakage</option>
+              </select>
+            </div>
+            <div class="q"><label>The stage where revenue is being lost is:</label><textarea data-field="cash-an-loss"></textarea></div>
+            <div class="q"><label>The commercial decision I need to make is:</label><textarea data-field="cash-an-decision"></textarea></div>
+          </div>
+        </div>
+
+        <div class="output-card">
+          <div class="output-head">Required output &middot; what you leave with</div>
+          <div class="q"><label>One six-month revenue goal</label><input type="text" data-field="cash-out-goal"></div>
+          <div class="q"><label>One core offer</label><input type="text" data-field="cash-out-offer"></div>
+          <div class="q"><label>Required monthly sales</label><input type="text" data-field="cash-out-sales"></div>
+          <div class="q"><label>Required monthly leads</label><input type="text" data-field="cash-out-leads"></div>
+          <div class="q"><label>One primary sales mechanism</label><input type="text" data-field="cash-out-mech"></div>
+          <div class="q"><label>One offer to grow</label><input type="text" data-field="cash-out-grow"></div>
+          <div class="q"><label>One offer to refine, pause or retire</label><input type="text" data-field="cash-out-refine"></div>
+          <div class="q"><label>One revenue leak to fix</label><input type="text" data-field="cash-out-leak"></div>
+          <div class="q"><label>One campaign priority (including Black Friday where relevant)</label><textarea data-field="cash-out-campaign"></textarea></div>
+        </div>
+
+
+        <div class="score-block">
+          <div class="sb-top"><span class="sb-lbl">Cash Score</span><span class="score-val"><span id="sv-cash-d">5</span><span>/10</span></span></div>
+          <input type="range" min="1" max="10" value="5" data-field="score-cash" data-anchor="cash" oninput="onScore(this)">
+          <div class="anchor" id="anchor-cash"></div>
+        </div>
+        <div class="page-export"><div class="pe-text">Download this completed section as a standalone PDF.</div><button class="btn" id="pe-cash" onclick="exportSection('cash')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Export Cash to PDF</button></div>
+        <div class="export-foot"><button class="btn ghost" onclick="go('visibility')">Back</button><button class="btn" onclick="go('subconscious')">Next: Subconscious Mastery</button><button class="reset-mini" onclick="resetPage('cash',this)">Reset page</button></div>
+      </section>
+
+      <!-- ============ SUBCONSCIOUS ============ -->
+      <section class="section" data-section="subconscious">
+        <div class="section-head"><span class="pill-dot" style="background:var(--dot-sub)"></span><span class="eyebrow">Pillar Four &middot; Fears, Identity and Capacity</span></div>
+        <h3 class="serif">Subconscious Mastery</h3>
+        <div class="core-diagnostic"><div class="lbl">The core diagnostic &middot; the multiplier</div><p>Does your internal capacity support the level of visibility, responsibility and success you say you want, or are subconscious patterns repeatedly pulling you back to what feels familiar?</p></div>
+
+        <div class="accordion open">
+          <button class="acc-head" onclick="toggleAcc(this)"><span class="acc-title">Review &middot; What happened</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="acc-body">
+            <div class="acc-q">Answers: <b>which internal patterns shaped your decisions, consistency and capacity over the last six months?</b></div>
+            <div class="q"><label>The three moments where I acted like the business owner I am becoming:</label><textarea data-field="sub-rev-owner"></textarea></div>
+            <div class="q"><label>The three moments where fear, avoidance or self-doubt influenced a business decision:</label><textarea data-field="sub-rev-fear"></textarea></div>
+            <div class="q"><label>The opportunities I delayed, rejected or complicated because I did not feel ready:</label><textarea data-field="sub-rev-delayed"></textarea></div>
+            <div class="q"><label>The situations that triggered the strongest emotional reaction in me:</label><div class="hint">For example: low engagement, criticism, selling, being ignored, receiving more clients, increasing prices or being more visible.</div><textarea data-field="sub-rev-triggers"></textarea></div>
+            <div class="q"><label>The pattern I repeated most often when the business started gaining momentum:</label><textarea data-field="sub-rev-momentum"></textarea></div>
+            <div class="q"><label>The pattern I repeated most often when results slowed down:</label><textarea data-field="sub-rev-slowed"></textarea></div>
+            <div class="q"><label>The responsibilities, decisions or standards I successfully expanded my capacity to hold:</label><textarea data-field="sub-rev-expanded"></textarea></div>
+            <div class="q"><label>The areas where I kept returning to an old version of myself:</label><textarea data-field="sub-rev-returned"></textarea></div>
+          </div>
+        </div>
+        <div class="accordion">
+          <button class="acc-head" onclick="toggleAcc(this)"><span class="acc-title">Audit &middot; What exists now</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="acc-body">
+            <div class="acc-q">Answers: <b>does your current identity support your next level, or is the business still being led by old fears, beliefs and coping patterns?</b></div>
+            <div class="q"><label>What does the next level of the business currently require from you emotionally, practically and energetically?</label><textarea data-field="sub-aud-require"></textarea></div>
+            <div class="q"><label>Where do you feel resistance?</label><textarea data-field="sub-aud-resistance"></textarea></div>
+            <div class="q"><label>Which fear currently has the greatest influence over your behaviour?</label><div class="hint">For example: being judged, failing publicly, succeeding, disappointing people, making the wrong decision, losing freedom or becoming responsible for more.</div><textarea data-field="sub-aud-fear"></textarea></div>
+            <div class="q"><label>What do you currently believe would happen if the business became significantly more visible or successful?</label><textarea data-field="sub-aud-belief"></textarea></div>
+            <div class="q"><label>Which version of yourself is currently making most of your business decisions? Describe her standards, habits, fears and expectations.</label><textarea data-field="sub-aud-version"></textarea></div>
+            <div class="q"><label>What do you say you want, but repeatedly behave as though you do not feel safe having?</label><textarea data-field="sub-aud-unsafe"></textarea></div>
+            <div class="q"><label>Where are you using perfectionism, overthinking, preparation or optimisation as a form of avoidance?</label><textarea data-field="sub-aud-avoidance"></textarea></div>
+            <div class="q"><label>Which emotions are you currently able to hold without abandoning the strategy?</label><div class="hint">For example: uncertainty, disappointment, boredom, pressure, criticism, urgency or temporary low results.</div><textarea data-field="sub-aud-emotions"></textarea></div>
+            <div class="q"><label>What level of success, visibility or responsibility currently feels normal, and what starts to feel unsafe, excessive or unsustainable?</label><textarea data-field="sub-aud-normal"></textarea></div>
+          </div>
+        </div>
+        <div class="accordion">
+          <button class="acc-head" onclick="toggleAcc(this)"><span class="acc-title">Analysis &middot; Constraint and decision</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="acc-body">
+            <div class="acc-q">Choose <b>one</b> primary constraint, then make the decision.</div>
+            <div class="q"><label>My primary Subconscious Mastery constraint is:</label>
+              <select data-field="sub-constraint">
+                <option value="">Select your primary constraint</option>
+                <option>Fear of being judged or criticised</option>
+                <option>Fear of failing publicly</option>
+                <option>Fear of becoming more visible</option>
+                <option>Fear of success and increased responsibility</option>
+                <option>Fear of disappointing clients or my audience</option>
+                <option>Fear of making the wrong decision</option>
+                <option>Fear of losing freedom as the business grows</option>
+                <option>Perfectionism</option>
+                <option>Overthinking and indecision</option>
+                <option>Avoidance of selling</option>
+                <option>Avoidance of leadership</option>
+                <option>Difficulty trusting myself</option>
+                <option>Difficulty holding uncertainty</option>
+                <option>Difficulty sustaining momentum</option>
+                <option>Returning to old habits after growth</option>
+                <option>Creating chaos when things become stable</option>
+                <option>Undercharging or overdelivering to feel safe</option>
+                <option>Needing external validation before acting</option>
+                <option>Believing I must work harder to deserve more</option>
+                <option>My current identity no longer matches my goals</option>
+                <option>My capacity is not yet supporting my strategy</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="q"><label>The subconscious pattern I need to interrupt:</label><textarea data-field="sub-an-interrupt"></textarea></div>
+            <div class="q"><label>The old identity I need to stop reinforcing:</label><textarea data-field="sub-an-oldid"></textarea></div>
+            <div class="q"><label>The fear I need to stop organising the business around:</label><textarea data-field="sub-an-fear"></textarea></div>
+            <div class="q"><label>The emotion or experience I need to increase my capacity to hold:</label><textarea data-field="sub-an-emotion"></textarea></div>
+            <div class="q"><label>The new standard I am choosing for the next six months:</label><textarea data-field="sub-an-standard"></textarea></div>
+            <div class="q"><label>The decision I will make differently when this pattern appears again:</label><textarea data-field="sub-an-decision"></textarea></div>
+          </div>
+        </div>
+
+        <div class="output-card">
+          <div class="output-head">Required output &middot; what you leave with</div>
+          <div class="q"><label>One old identity to release</label><input type="text" data-field="sub-out-release"></div>
+          <div class="q"><label>One new identity to reinforce</label><input type="text" data-field="sub-out-reinforce"></div>
+          <div class="q"><label>One core belief to strengthen</label><input type="text" data-field="sub-out-belief"></div>
+          <div class="q"><label>One fear I will no longer allow to make business decisions</label><input type="text" data-field="sub-out-fear"></div>
+          <div class="q"><label>Three behaviours that prove my new identity</label><textarea data-field="sub-out-behaviours"></textarea></div>
+          <div class="q"><label>One capacity I need to expand</label><div class="hint">For example: being seen by more people, receiving more money, managing more clients, holding responsibility, making faster decisions, receiving criticism, experiencing uncertainty, sustaining consistency, maintaining success without creating chaos.</div><input type="text" data-field="sub-out-capacity"></div>
+          <div class="q"><label>One regulation or reprogramming practice</label><input type="text" data-field="sub-out-practice"></div>
+          <div class="q"><label>Pattern-interruption plan &middot; when I notice myself:</label><input type="text" data-field="sub-out-notice"></div>
+          <div class="q"><label>Instead of:</label><input type="text" data-field="sub-out-insteadof"></div>
+          <div class="q"><label>I will:</label><input type="text" data-field="sub-out-iwill"></div>
+          <div class="q"><label>One identity statement</label><input type="text" data-field="sub-out-identity" placeholder="I am the business owner who..."></div>
+          <div class="q"><label>One subconscious pattern to stop</label><input type="text" data-field="sub-out-stop"></div>
+        </div>
+
+
+        <div class="score-block">
+          <div class="sb-top"><span class="sb-lbl">Hold Point Score</span><span class="score-val"><span id="sv-hold-d">5</span><span>/10</span></span></div>
+          <input type="range" min="1" max="10" value="5" data-field="score-hold" data-anchor="hold" oninput="onScore(this)">
+          <div class="anchor" id="anchor-hold"></div>
+        </div>
+        <div class="page-export"><div class="pe-text">Download this completed section as a standalone PDF.</div><button class="btn" id="pe-subconscious" onclick="exportSection('subconscious')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Export Subconscious Mastery to PDF</button></div>
+        <div class="export-foot"><button class="btn ghost" onclick="go('cash')">Back</button><button class="btn" onclick="go('number')">Next: The Number</button><button class="reset-mini" onclick="resetPage('subconscious',this)">Reset page</button></div>
+      </section>
+
+      <!-- ============ THE NUMBER ============ -->
+      <section class="section" data-section="number">
+        <div class="section-head"><span class="eyebrow">The Capacity Gap</span></div>
+        <h3 class="serif">The Number</h3>
+        <p class="lead" style="margin-top:18px">Your best month proves what the engine can produce. Your Unconscious Revenue Standard is the level you keep returning to. The gap between them is the cost of the pattern.</p>
+
+        <div class="num-field" style="max-width:240px;margin-top:24px">
+          <label>Currency</label>
+          <select data-field="num-cur" onchange="setCurrency(this.value)">
+            <option value="AUD">AUD</option>
+            <option value="NZD">NZD</option>
+            <option value="GBP">GBP</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="CAD">CAD</option>
+            <option value="JPY">JPY</option>
+            <option value="CHF">CHF</option>
+            <option value="HKD">HKD</option>
+            <option value="AED">AED</option>
+            <option value="SGD">SGD</option>
+          </select>
+        </div>
+
+        <div class="num-grid">
+          <div class="num-field"><label>Your best month this half</label><input type="number" data-field="num-best" placeholder="e.g. 30000" oninput="calcGap()"></div>
+          <div class="num-field"><label>Your actual six-month total</label><input type="number" data-field="num-total" placeholder="e.g. 108000" oninput="calcGap()"></div>
+          <div class="num-field"><label>Your lowest month this half</label><input type="number" data-field="num-low" placeholder="e.g. 9000" oninput="calcGap()"></div>
+          <div class="num-field"><label>Ideal Lifestyle Number (ILN)</label><input type="number" data-field="num-iln" placeholder="e.g. 60000" oninput="calcGap()"></div>
+          <div class="num-field"><label>Unconscious Revenue Standard (URS)</label><input type="number" data-field="num-urs" placeholder="e.g. 18000" oninput="calcGap()"></div>
+        </div>
+
+        <div class="gap-display">
+          <div class="row">
+            <div class="c"><div class="l">Best Month</div><div class="v" id="gp-best">$0</div></div>
+            <div class="c"><div class="l">URS</div><div class="v" id="gp-urs">$0</div></div>
+          </div>
+          <div class="number-lbl">Your Capacity Gap</div>
+          <div class="number" id="gp-gap">$0</div>
+          <div class="gap-note">The distance between your proven peak and the level you unconsciously return to. The next six months are about raising the floor to close it.</div>
+        </div>
+
+        <div class="num-grid" style="margin-top:24px">
+          <div class="q"><label>What did you do in your best month?</label><textarea data-field="num-best-did"></textarea></div>
+          <div class="q"><label>What did you do in your lowest month?</label><textarea data-field="num-low-did"></textarea></div>
+        </div>
+        <div class="export-foot"><button class="btn ghost" onclick="go('subconscious')">Back</button><button class="btn" onclick="go('verdict')">Next: The Verdict</button><button class="reset-mini" onclick="resetPage('number',this)">Reset page</button></div>
+      </section>
+
+      <!-- ============ VERDICT ============ -->
+      <section class="section" data-section="verdict">
+        <div class="section-head"><span class="eyebrow">Four pillars, eight decisions</span></div>
+        <h3 class="serif">The Verdict</h3>
+        <p class="lead" style="margin-top:18px">Your four pillar scores now collapse into four clear decisions. For each WMHQ pillar, identify the primary strategic constraint and the primary subconscious constraint affecting execution.</p>
+
+        <div class="vd-cards" id="vd-score-cards"></div>
+
+        <div class="block-card">
+          <div class="bc-lbl">Influence Verdict</div>
+          <div class="bc-help">Identify the primary messaging or positioning issue limiting buyer understanding, demand or differentiation, then name the subconscious pattern affecting your ability to strengthen it.</div>
+          <div class="vd-scoreline">Influence Score: <b id="vd-inf-score">- / 10</b></div>
+          <div class="num-grid">
+            <div class="q" style="margin:0">
+              <label>#1 Strategic Constraint</label>
+              <select data-field="vd-inf-strat" onchange="renderVerdict()">
+                <option value="">Select one</option>
+                <option>My positioning is too broad</option>
+                <option>My ideal buyer is unclear</option>
+                <option>My message does not communicate the value quickly enough</option>
+                <option>My content generates agreement but not buying action</option>
+                <option>My offer is difficult to explain</option>
+                <option>My message lacks differentiation</option>
+                <option>My buyer problem is not specific enough</option>
+                <option>My content does not build a strong core belief</option>
+                <option>My messaging changes too frequently</option>
+                <option>I am over-explaining instead of leading</option>
+                <option>Other</option>
+              </select>
+              <label style="margin-top:13px">Notes: What does this constraint currently look like in the business?</label>
+              <textarea data-field="vd-inf-strat-notes"></textarea>
+            </div>
+            <div class="q" style="margin:0">
+              <label>#1 Subconscious Constraint</label>
+              <select data-field="vd-inf-sub" onchange="renderVerdict()">
+                <option value="">Select one</option>
+                <option>Fear of becoming too specific</option>
+                <option>Fear of excluding potential buyers</option>
+                <option>Fear of being misunderstood</option>
+                <option>Fear of having a stronger opinion</option>
+                <option>Fear of repeating myself</option>
+                <option>Perfectionism around wording</option>
+                <option>Overthinking my positioning</option>
+                <option>Lack of trust in my own expertise</option>
+                <option>Seeking external validation before committing</option>
+                <option>Changing the message when results feel slow</option>
+                <option>Other</option>
+              </select>
+              <label style="margin-top:13px">Notes: How does this pattern affect your messaging decisions or execution?</label>
+              <textarea data-field="vd-inf-sub-notes"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="block-card">
+          <div class="bc-lbl">Visibility Verdict</div>
+          <div class="bc-help">Identify the primary content or marketing issue limiting reach, consistency or movement towards the offer, then name the subconscious pattern affecting execution.</div>
+          <div class="vd-scoreline">Visibility Score: <b id="vd-vis-score">- / 10</b></div>
+          <div class="num-grid">
+            <div class="q" style="margin:0">
+              <label>#1 Strategic Constraint</label>
+              <select data-field="vd-vis-strat" onchange="renderVerdict()">
+                <option value="">Select one</option>
+                <option>I am not reaching enough new people</option>
+                <option>My content attracts attention but not potential buyers</option>
+                <option>My content does not lead people towards an offer</option>
+                <option>My visibility is inconsistent</option>
+                <option>I do not have a repeatable weekly content system</option>
+                <option>I rely too heavily on one platform or format</option>
+                <option>I am not nurturing my existing audience</option>
+                <option>My content lacks a recognisable direction</option>
+                <option>My calls to action are weak or inconsistent</option>
+                <option>I am creating too much content without enough commercial purpose</option>
+                <option>I am not using performance data to guide decisions</option>
+                <option>Other</option>
+              </select>
+              <label style="margin-top:13px">Notes: What does this constraint currently look like in the business?</label>
+              <textarea data-field="vd-vis-strat-notes"></textarea>
+            </div>
+            <div class="q" style="margin:0">
+              <label>#1 Subconscious Constraint</label>
+              <select data-field="vd-vis-sub" onchange="renderVerdict()">
+                <option value="">Select one</option>
+                <option>Fear of being seen</option>
+                <option>Fear of judgement or criticism</option>
+                <option>Fear of low engagement</option>
+                <option>Fear of repeating myself</option>
+                <option>Perfectionism before publishing</option>
+                <option>Comparing my content to other people</option>
+                <option>Avoiding consistency when results feel slow</option>
+                <option>Disappearing after a high-visibility period</option>
+                <option>Feeling unsafe with greater attention</option>
+                <option>Overcomplicating content creation</option>
+                <option>Relying on motivation instead of a system</option>
+                <option>Other</option>
+              </select>
+              <label style="margin-top:13px">Notes: How does this pattern affect your visibility or consistency?</label>
+              <textarea data-field="vd-vis-sub-notes"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="block-card">
+          <div class="bc-lbl">Cash Verdict</div>
+          <div class="bc-help">Identify the primary sales ecosystem issue limiting lead conversion, recurring revenue or cash flow, then name the subconscious pattern affecting sales execution.</div>
+          <div class="vd-scoreline">Cash Score: <b id="vd-cash-score">- / 10</b></div>
+          <div class="num-grid">
+            <div class="q" style="margin:0">
+              <label>#1 Strategic Constraint</label>
+              <select data-field="vd-cash-strat" onchange="renderVerdict()">
+                <option value="">Select one</option>
+                <option>I do not generate enough qualified leads</option>
+                <option>I do not make enough offers</option>
+                <option>My sales pathway is unclear</option>
+                <option>My offer suite is too complicated</option>
+                <option>My conversion process is inconsistent</option>
+                <option>I rely too heavily on launches or sales spikes</option>
+                <option>I do not have enough recurring revenue</option>
+                <option>My follow-up process is weak</option>
+                <option>My sales conversations do not convert consistently</option>
+                <option>I have no clear nurture pathway</option>
+                <option>My pricing or packaging is limiting growth</option>
+                <option>My existing audience is under-monetised</option>
+                <option>Other</option>
+              </select>
+              <label style="margin-top:13px">Notes: What does this constraint currently look like in the business?</label>
+              <textarea data-field="vd-cash-strat-notes"></textarea>
+            </div>
+            <div class="q" style="margin:0">
+              <label>#1 Subconscious Constraint</label>
+              <select data-field="vd-cash-sub" onchange="renderVerdict()">
+                <option value="">Select one</option>
+                <option>Fear of selling too often</option>
+                <option>Fear of rejection</option>
+                <option>Fear of hearing no</option>
+                <option>Fear of increasing prices</option>
+                <option>Fear of appearing greedy or pushy</option>
+                <option>Avoiding follow-up</option>
+                <option>Undercharging to feel safer</option>
+                <option>Overdelivering to prove value</option>
+                <option>Discomfort receiving more money</option>
+                <option>Difficulty holding sales pressure</option>
+                <option>Self-worth tied to revenue results</option>
+                <option>Creating urgency or chaos to generate sales</option>
+                <option>Other</option>
+              </select>
+              <label style="margin-top:13px">Notes: How does this pattern affect your sales behaviour or revenue?</label>
+              <textarea data-field="vd-cash-sub-notes"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="block-card">
+          <div class="bc-lbl">Subconscious Mastery Verdict</div>
+          <div class="bc-help">Identify the primary internal capacity issue limiting growth, then name the deeper subconscious pattern that continues to reinforce it. The first field still focuses on the practical growth constraint created by the internal pattern.</div>
+          <div class="vd-scoreline">Subconscious Mastery Score: <b id="vd-sub-score">- / 10</b></div>
+          <div class="num-grid">
+            <div class="q" style="margin:0">
+              <label>#1 Strategic Constraint</label>
+              <select data-field="vd-sub-strat" onchange="renderVerdict()">
+                <option value="">Select one</option>
+                <option>I struggle to sustain momentum</option>
+                <option>I abandon strategies too early</option>
+                <option>I delay important decisions</option>
+                <option>I create chaos when the business becomes stable</option>
+                <option>My current capacity does not support my goals</option>
+                <option>I struggle to hold greater visibility</option>
+                <option>I struggle to hold increased responsibility</option>
+                <option>I return to old habits after growth</option>
+                <option>I am operating from an outdated identity</option>
+                <option>I avoid leadership decisions</option>
+                <option>I rely on urgency to take action</option>
+                <option>I cannot maintain consistency through uncertainty</option>
+                <option>Other</option>
+              </select>
+              <label style="margin-top:13px">Notes: How is this constraint affecting the business in practical terms?</label>
+              <textarea data-field="vd-sub-strat-notes"></textarea>
+            </div>
+            <div class="q" style="margin:0">
+              <label>#1 Subconscious Constraint</label>
+              <select data-field="vd-sub-sub" onchange="renderVerdict()">
+                <option value="">Select one</option>
+                <option>Fear of failure</option>
+                <option>Fear of success</option>
+                <option>Fear of being judged</option>
+                <option>Fear of increased responsibility</option>
+                <option>Fear of losing freedom</option>
+                <option>Fear of disappointing people</option>
+                <option>Perfectionism</option>
+                <option>Overthinking and indecision</option>
+                <option>Lack of self-trust</option>
+                <option>Needing external validation</option>
+                <option>Difficulty holding uncertainty</option>
+                <option>Difficulty receiving more</option>
+                <option>Believing success must require more effort</option>
+                <option>Feeling unsafe when growth becomes consistent</option>
+                <option>Identity attachment to struggle</option>
+                <option>Other</option>
+              </select>
+              <label style="margin-top:13px">Notes: What belief, fear or identity pattern is reinforcing this constraint?</label>
+              <textarea data-field="vd-sub-sub-notes"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="block-card">
+          <div class="bc-lbl">Your Four Pillar Verdict</div>
+          <div class="bc-help">Review the primary strategic and subconscious constraint selected for each WMHQ pillar. These eight decisions will shape your 180-day plan.</div>
+          <div id="vd-summary"></div>
+          <div class="num-grid" style="margin-top:18px">
+            <div class="q" style="margin:0">
+              <label>The WMHQ Pillar I will address first</label>
+              <div class="bc-help" style="margin:0 0 8px">Choose the pillar that will create the greatest commercial movement when addressed first. This does not need to be the lowest-scoring pillar.</div>
+              <select data-field="vd-first" onchange="renderVerdict()">
+                <option value="">Select one</option>
+                <option>Influence</option>
+                <option>Visibility</option>
+                <option>Cash</option>
+                <option>Subconscious Mastery</option>
+              </select>
+            </div>
+            <div class="q" style="margin:0">
+              <label>Why this pillar comes first:</label>
+              <textarea data-field="vd-first-notes"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="page-export"><div class="pe-text">Download this completed section as a standalone PDF.</div><button class="btn" id="pe-verdict" onclick="exportSection('verdict')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Export Verdict to PDF</button></div>
+        <div class="export-foot"><button class="btn ghost" onclick="go('number')">Back</button><button class="btn" onclick="go('floorplan')">Next: 6-Month Plan</button><button class="reset-mini" onclick="resetPage('verdict',this)">Reset page</button></div>
+      </section>
+
+      <!-- ============ FLOOR PLAN ============ -->
+      <section class="section" data-section="floorplan">
+        <div class="section-head"><span class="eyebrow">The deliverable</span></div>
+        <h3 class="serif">6-Month Plan</h3>
+        <p class="lead" style="margin-top:18px">You set two numbers, not one. A target to grow into, and a floor you never drop below again. The floor is the actual win.</p>
+
+        <div class="block-card">
+          <div class="bc-lbl">Target MRR</div>
+          <div class="bc-help">Set your target monthly recurring revenue and the dashboard calculates your weekly, daily and hourly targets.</div>
+          <input type="number" data-field="fp-mrr" placeholder="e.g. 50000" oninput="calcMRR()" style="max-width:340px">
+          <div class="mrr-grid">
+            <div class="mrr-cell"><div class="mrr-l">Monthly</div><div class="mrr-v" id="mrr-monthly">&mdash;</div></div>
+            <div class="mrr-cell"><div class="mrr-l">Weekly</div><div class="mrr-v" id="mrr-weekly">&mdash;</div></div>
+            <div class="mrr-cell"><div class="mrr-l">Daily</div><div class="mrr-v" id="mrr-daily">&mdash;</div></div>
+            <div class="mrr-cell"><div class="mrr-l">Hourly</div><div class="mrr-v" id="mrr-hourly">&mdash;</div></div>
+          </div>
+          <div class="mrr-note">These figures are based on your monthly recurring revenue target and are designed to help you think in smaller execution windows.</div>
+        </div>
+
+        <div class="block-card" style="margin-top:16px;margin-bottom:14px">
+          <div class="bc-lbl">Pillar Priority Plan</div>
+          <div class="bc-help" style="margin-bottom:0">Choose the three most important priorities within each WMHQ pillar for the next six months. Rank them in order, select the specific focus and define what needs to change, strengthen or be built.</div>
+        </div>
+        <div id="priority-rows"></div>
+
+        <div class="block-card">
+          <div class="bc-lbl">Revenue / Launch Events &middot; Next Six Months</div>
+          <div class="bc-help">Map the revenue activities and launch campaigns planned for the next six months so you can see exactly what is contributing to your revenue target.</div>
+          <div id="events-list"></div>
+          <button class="add-btn" onclick="addEvent()">+ Add Event</button>
+          <div class="evt-total"><span>Total projected revenue from all events</span><b id="events-total">&mdash;</b></div>
+        </div>
+
+        <div class="gap-display" style="padding:30px 28px">
+          <div class="number-lbl">Total projected revenue for the next six months</div>
+          <div class="number" id="combined-total">&mdash;</div>
+        </div>
+
+        <div class="page-export"><div class="pe-text">Download this completed section as a standalone PDF.</div><button class="btn" id="pe-floorplan" onclick="exportSection('floorplan')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Export 6-Month Plan to PDF</button></div>
+        <div class="export-foot"><button class="btn ghost" onclick="go('verdict')">Back</button><button class="btn" onclick="go('export')">Finish and export</button><button class="reset-mini" onclick="resetPage('floorplan',this)">Reset page</button></div>
+      </section>
+
+      <!-- ============ EXPORT ============ -->
+      <section class="section" data-section="export">
+        <div class="section-head"><span class="eyebrow">The end of the reset</span></div>
+        <h3 class="serif">Export your plan</h3>
+        <p class="lead" style="margin-top:18px">Export one complete, branded record of your six-month review and plan. Your PDF will include every completed section, score, decision, constraint and revenue target in one document. You can also copy a clean text version directly into Google Docs.</p>
+
+        <div class="block-card" style="padding:30px 28px">
+          <div class="bc-lbl">Ready to export</div>
+          <div class="serif" style="font-size:23px;color:var(--merlot);margin:4px 0 8px;line-height:1.2">Your complete six-month plan is ready</div>
+          <p class="bc-help" style="font-size:14px;margin-bottom:18px">Download a branded PDF or copy the full plan into Google Docs. Both options include every completed section in one organised document.</p>
+          <div class="num-field" style="max-width:320px;margin-bottom:20px">
+            <label>Your name (optional)</label>
+            <input type="text" data-field="member-name" placeholder="Appears at the top of your export">
+          </div>
+          <div class="export-actions">
+            <button class="btn" id="pdfBtn" onclick="generatePDF()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              Export Full Plan to PDF
+            </button>
+            <button class="btn ghost" id="copyBtn" onclick="copyForDocs()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              Copy for Google Docs
+            </button>
+          </div>
+          <div class="export-msg" id="exportMsg"></div>
+          <div id="copyFallback"></div>
+        </div>
+
+        <div class="export-foot">
+          <button class="btn ghost" onclick="go('floorplan')">Back to plan</button>
+          <button class="btn ghost" onclick="openClearModal()">Clear this browser's answers</button>
+        </div>
+      </section>
+
+      <div class="ip-disclaimer">This work is the sole property of Jessica Pinili. You do not have permission to share, sublicense, distribute, duplicate, sell, licence, or create derivative works in any capacity. All rights on intellectual property of this digital product are proprietary and reserved for exclusive use by Jessica Pinili alone.</div>
+      <div class="site-footer">&copy; Jessica Pinili <span class="sf-sep">|</span> Woman Mastery HQ</div>
+
+    </div>
+  </main>
+</div>
+
+<!-- PRINT VIEW -->
+<div id="export-view"></div>
+
+<div class="modal-scrim" id="clearModal">
+  <div class="modal-card">
+    <div class="modal-title serif">Clear all saved answers?</div>
+    <div class="modal-body">This will permanently remove every answer, score, event and plan saved in this browser. This cannot be undone.</div>
+    <div class="modal-actions">
+      <button class="btn ghost" onclick="closeClearModal()">Cancel</button>
+      <button class="btn danger" onclick="confirmClear()">Yes, clear everything</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+/* ---------- NAV CONFIG ---------- */
+const SECTIONS=[
+  {id:'welcome',label:'Welcome',dot:null},
+  {id:'influence',label:'Influence',dot:'var(--dot-influence)'},
+  {id:'visibility',label:'Visibility',dot:'var(--dot-visibility)'},
+  {id:'cash',label:'Cash',dot:'var(--dot-cash)'},
+  {id:'subconscious',label:'Subconscious',dot:'var(--dot-sub)'},
+  {id:'number',label:'The Number',dot:null},
+  {id:'verdict',label:'The Verdict',dot:null},
+  {id:'floorplan',label:'6-Month Plan',dot:null},
+  {id:'export',label:'Export',dot:null}
+];
+
+/* ---------- STORE (graceful: localStorage on your hosted site, in-memory fallback in preview) ---------- */
+const KEY='wmhq-vip-workshop-2026-06-25';
+let mem={};
+function loadState(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):{};}catch(e){return mem;}}
+function saveState(d){try{localStorage.setItem(KEY,JSON.stringify(d));}catch(e){mem=d;}}
+let state=loadState();
+let saveTimer=null;
+function flagSaving(){const t=document.getElementById('savedText');t.textContent='Saving...';clearTimeout(saveTimer);saveTimer=setTimeout(()=>{saveState(state);t.textContent='All changes saved';},350);}
+
+/* ---------- NAV RENDER ---------- */
+function buildNav(){
+  const nav=document.getElementById('nav');
+  nav.innerHTML=SECTIONS.map((s,i)=>`
+    <div class="nav-item" data-go="${s.id}" onclick="go('${s.id}')">
+      <span class="num">${String(i).padStart(2,'0')}</span>
+      ${s.dot?`<span class="dot" style="background:${s.dot}"></span>`:`<span class="dot" style="background:transparent"></span>`}
+      <span>${s.label}</span>
+    </div>`).join('');
+}
+function go(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.dataset.section===id));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.go===id));
+  if(id==='verdict')renderVerdict();
+  if(id==='welcome')renderCommandCentre();
+  if(id==='number')animateGap();
+  if(id==='floorplan')renderFloorplan();
+  const rb=document.getElementById('returnBtn');if(rb)rb.classList.toggle('show',id!=='welcome');
+  document.querySelector('.content').scrollIntoView({behavior:'smooth',block:'start'});
+  if(window.innerWidth<=880)closeMenu();
+}
+
+/* ---------- COMMAND CENTRE ---------- */
+const PILLARS=[
+  {id:'influence',name:'Influence',sub:'Messaging and positioning',dot:'var(--dot-influence)',fields:['inf-constraint','inf-out-positioning','inf-out-problem','inf-out-belief','inf-out-messages','inf-out-stop'],score:'score-influence'},
+  {id:'visibility',name:'Visibility',sub:'Content and marketing',dot:'var(--dot-visibility)',fields:['vis-constraint','vis-out-platform','vis-out-owned','vis-out-pathway','vis-out-series','vis-out-plan','vis-out-metric'],score:'score-visibility'},
+  {id:'cash',name:'Cash',sub:'Sales and business ecosystem',dot:'var(--dot-cash)',fields:['cash-constraint','cash-out-goal','cash-out-offer','cash-out-sales','cash-out-leads','cash-out-mech','cash-out-grow','cash-out-refine','cash-out-leak','cash-out-campaign'],score:'score-cash'},
+  {id:'subconscious',name:'Subconscious Mastery',sub:'Fears, identity and capacity',dot:'var(--dot-sub)',fields:['sub-constraint','sub-out-release','sub-out-reinforce','sub-out-belief','sub-out-fear','sub-out-behaviours','sub-out-capacity','sub-out-practice','sub-out-identity','sub-out-stop'],score:'score-hold'}
+];
+function pillarStatus(p){
+  const essentialFilled=p.fields.filter(f=>(state[f]||'').toString().trim()!=='').length;
+  const scored=state[p.score]!==undefined;
+  let anyFilled=false;
+  const sec=document.querySelector('[data-section="'+p.id+'"]');
+  if(sec){sec.querySelectorAll('[data-field]').forEach(f=>{if(f.type!=='range'&&(f.value||'').toString().trim()!=='')anyFilled=true;});}
+  if(!anyFilled&&!scored)return{txt:'Not started',cls:'ns'};
+  if(essentialFilled>=p.fields.length&&scored)return{txt:'Complete',cls:'done'};
+  return{txt:'In progress',cls:'ip'};
+}
+function renderCommandCentre(){
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+  const scoredCount=PILLARS.filter(p=>state[p.score]!==undefined).length;
+  let f=0,t=0;document.querySelectorAll('[data-field]').forEach(x=>{if(x.type==='range')return;t++;if((x.value||'').trim()!=='')f++;});
+  const pct=t?Math.round(f/t*100):0;
+  set('cc-pct',pct+'%');
+  set('cc-scored',scoredCount+' / 4');
+  const best=+(state['num-best']||0),urs=+(state['num-urs']||0),gap=Math.max(best-urs,0);
+  set('cc-gapstat',(best&&urs)?fmt(gap):'Pending');
+  set('cc-holdstat',state['score-hold']!==undefined?state['score-hold']+' / 10':'Not set');
+  const ring=document.getElementById('cc-ring');
+  if(ring)ring.style.background='conic-gradient(var(--merlot) '+(pct*3.6)+'deg,#e7c4d0 0deg)';
+  const bars=document.getElementById('cc-bars');
+  if(bars){
+    const data=[['Infl','score-influence',false],['Vis','score-visibility',false],['Cash','score-cash',false],['Hold','score-hold',true]];
+    bars.innerHTML=data.map(d=>{const has=state[d[1]]!==undefined;const v=has?+state[d[1]]:0;const h=has?Math.round(v/10*100):6;return '<div class="bc-bar"><span class="bval">'+(has?v:'-')+'</span><div class="bar'+(d[2]?' hold':'')+'" style="height:'+h+'%;opacity:'+(has?1:.35)+'"></div><span class="blabel">'+d[0]+'</span></div>';}).join('');
+  }
+  const list=document.getElementById('cc-pillar-list');
+  if(list){
+    list.innerHTML=PILLARS.map(p=>{const s=pillarStatus(p);const sc=state[p.score]!==undefined?state[p.score]:'-';return '<div class="cc-row" onclick="go(\''+p.id+'\')"><span class="row-dot" style="background:'+p.dot+'"></span><div class="row-text"><div class="row-name">'+p.name+'</div><div class="row-sub">'+p.sub+'</div></div><span class="cc-badge '+s.cls+'">'+s.txt+'</span><span class="row-score">'+sc+'</span></div>';}).join('');
+  }
+  renderChecklist();
+}
+const CHECKLIST=[
+  {k:'influence',label:'Audit: Influence'},
+  {k:'visibility',label:'Audit: Visibility'},
+  {k:'cash',label:'Audit: Cash'},
+  {k:'subconscious',label:'Audit: Subconscious Mastery'},
+  {k:'number',label:'The Number'},
+  {k:'verdict',label:'The Verdict'},
+  {k:'plan',label:'6-Month $$$ Plan'}
+];
+function clState(){if(!state.checklist||typeof state.checklist!=='object')state.checklist={};return state.checklist;}
+function clManual(){if(!state.checklistManual||typeof state.checklistManual!=='object')state.checklistManual={};return state.checklistManual;}
+function checklistComplete(k){
+  if(k==='influence'||k==='visibility'||k==='cash'||k==='subconscious'){const p=PILLARS.find(x=>x.id===k);return p?pillarStatus(p).cls==='done':false;}
+  if(k==='number')return !!(val('num-best')&&val('num-urs'));
+  if(k==='verdict')return !!val('vd-first');
+  if(k==='plan')return !!val('fp-mrr');
+  return false;
+}
+function autoCheck(){const cs=clState(),man=clManual();let changed=false;CHECKLIST.forEach(it=>{if(!man[it.k]&&!cs[it.k]&&checklistComplete(it.k)){cs[it.k]=true;changed=true;}});if(changed)flagSaving();}
+function renderChecklist(){
+  const host=document.getElementById('cc-checklist');if(!host)return;
+  autoCheck();
+  const cs=clState();
+  host.innerHTML=CHECKLIST.map(it=>{
+    const on=!!cs[it.k];
+    return '<button type="button" class="cl-item'+(on?' done':'')+'" role="checkbox" aria-checked="'+(on?'true':'false')+'" aria-label="'+escAttr(it.label)+'" onclick="toggleCheck(\''+it.k+'\')"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><span class="cl-name">'+esc(it.label)+'</span></button>';
+  }).join('');
+  const done=CHECKLIST.filter(it=>cs[it.k]).length;
+  const cnt=document.getElementById('cl-count');if(cnt)cnt.textContent=done+' of '+CHECKLIST.length+' complete';
+  const bar=document.getElementById('cl-bar-fill');if(bar)bar.style.width=Math.round(done/CHECKLIST.length*100)+'%';
+  const suc=document.getElementById('cl-success');if(suc)suc.hidden=(done!==CHECKLIST.length);
+}
+function toggleCheck(k){const cs=clState(),man=clManual();cs[k]=!cs[k];man[k]=true;flagSaving();renderChecklist();}
+function animateGap(){
+  const el=document.getElementById('gp-gap');if(!el)return;
+  const best=+(val('num-best')||0),urs=+(val('num-urs')||0),target=Math.max(best-urs,0);
+  if(target<=0)return;let start=null;
+  function step(ts){if(!start)start=ts;const p=Math.min((ts-start)/700,1);el.textContent=fmt(Math.round(target*(0.5-Math.cos(Math.PI*p)/2)));if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+}
+
+/* ---------- ACCORDION ---------- */
+function toggleAcc(btn){btn.parentElement.classList.toggle('open');}
+
+/* ---------- SCORE ANCHORS ---------- */
+const ANCHORS={
+  influence:{1:'No one gets what you do',3:'Clear to you, fuzzy to the market',5:'The right people sometimes get it',7:'Sharp, the dream client says "this is me"',10:'Magnetic, your words become theirs'},
+  visibility:{1:'Invisible or sporadic',3:'Posting to peers, not buyers',5:'Consistent reach, slow growth',7:'Qualified reach, predictable inbound',10:'Category presence, compounds without you'},
+  cash:{1:'Every sale manual and emotional',3:'One offer, ad hoc, no funnel',5:'A working offer, converts when you push',7:'Defined ladder and a funnel that converts',10:'A machine that sells without you'},
+  hold:{1:'Success triggers immediate contraction',3:'You hit but never hold',5:'You hold a peak then slide',7:'You hold most gains, recover faster',10:'Success is your baseline'}
+};
+function nearestAnchor(a,v){const keys=[1,3,5,7,10];let best=keys[0];for(const k of keys){if(v>=k)best=k;}return a[best];}
+function onScore(el){
+  const v=el.value, key=el.dataset.anchor;
+  document.getElementById('sv-'+(key==='hold'?'hold':key)+'-d').textContent=v;
+  document.getElementById('anchor-'+key).innerHTML='<b>'+v+'</b> &middot; '+nearestAnchor(ANCHORS[key],+v);
+  state[el.dataset.field]=v;flagSaving();updateProgress();
+}
+
+/* ---------- THE NUMBER ---------- */
+let CUR='AUD';
+const CURSYM={AUD:'$',NZD:'$',GBP:'£',USD:'$',EUR:'€',CAD:'$',JPY:'¥',CHF:'Fr ',HKD:'$',AED:'AED ',SGD:'$'};
+function fmt(n){return (CURSYM[CUR]||'$')+Math.round(n||0).toLocaleString('en-US');}
+function setCurrency(v){CUR=v||'AUD';state['num-cur']=CUR;flagSaving();calcGap();calcMRR();recalcTotals();}
+function calcGap(){
+  const sel=document.querySelector('[data-field="num-cur"]');if(sel)CUR=sel.value||'AUD';
+  const g=id=>{const e=document.querySelector('[data-field="'+id+'"]');return +((e&&e.value)||0);};
+  const best=g('num-best'),total=g('num-total'),low=g('num-low'),iln=g('num-iln'),urs=g('num-urs');
+  const gap=Math.max(best-urs,0);
+  const put=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+  put('gp-best',fmt(best));put('gp-urs',fmt(urs));put('gp-gap',fmt(gap));
+  state['num-best']=best||'';state['num-total']=total||'';state['num-low']=low||'';state['num-iln']=iln||'';state['num-urs']=urs||'';
+  flagSaving();updateProgress();
+}
+
+/* ---------- VERDICT SCORE SUMMARY ---------- */
+function renderVerdict(){
+  const PV=[
+    {key:'score-influence',name:'Influence',label:'Messaging and positioning',ak:'influence',sid:'vd-inf-score',strat:'vd-inf-strat',sub:'vd-inf-sub'},
+    {key:'score-visibility',name:'Visibility',label:'Content and marketing',ak:'visibility',sid:'vd-vis-score',strat:'vd-vis-strat',sub:'vd-vis-sub'},
+    {key:'score-cash',name:'Cash',label:'Sales ecosystem',ak:'cash',sid:'vd-cash-score',strat:'vd-cash-strat',sub:'vd-cash-sub'},
+    {key:'score-hold',name:'Subconscious Mastery',label:'Fears, identity and capacity',ak:'hold',sid:'vd-sub-score',strat:'vd-sub-strat',sub:'vd-sub-sub'}
+  ];
+  let lowest=99,lowKey='';
+  PV.forEach(p=>{if(state[p.key]!==undefined){const v=+state[p.key];if(v<lowest){lowest=v;lowKey=p.key;}}});
+  const cards=document.getElementById('vd-score-cards');
+  if(cards){cards.innerHTML=PV.map(p=>{
+    const scored=state[p.key]!==undefined;const v=scored?+state[p.key]:0;const pct=scored?v*10:0;
+    const interp=scored?nearestAnchor(ANCHORS[p.ak],v):'Not yet scored. Set this score in the pillar assessment.';
+    const low=(scored&&p.key===lowKey)?'<span class="vd-low">Lowest-scoring WMHQ Pillar</span>':'';
+    return '<div class="vd-card"><div class="vd-card-top"><div><div class="vd-name">'+p.name+'</div><div class="vd-sub">'+p.label+'</div></div><div class="vd-score">'+(scored?v:'-')+'<span>/10</span></div></div><div class="vd-bar"><div class="vd-bar-fill" style="width:'+pct+'%"></div></div><div class="vd-interp">'+esc(interp)+'</div>'+low+'</div>';
+  }).join('');}
+  PV.forEach(p=>{const e=document.getElementById(p.sid);if(e)e.textContent=(state[p.key]!==undefined?state[p.key]:'-')+' / 10';});
+  const incomplete=[];
+  const rows=PV.map(p=>{
+    const sc=state[p.key]!==undefined?state[p.key]+' / 10':'-';
+    const st=(state[p.strat]||'').toString().trim();
+    const su=(state[p.sub]||'').toString().trim();
+    if(!st||!su)incomplete.push(p.name);
+    return '<tr><td>'+p.name+'</td><td>'+sc+'</td><td>'+(st?esc(st):'<span class="vd-missing">Not selected</span>')+'</td><td>'+(su?esc(su):'<span class="vd-missing">Not selected</span>')+'</td></tr>';
+  }).join('');
+  const tbl='<table class="vd-table"><thead><tr><th>WMHQ Pillar</th><th>Score</th><th>#1 Strategic Constraint</th><th>#1 Subconscious Constraint</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  const valid=incomplete.length
+    ? '<div class="vd-validate">Complete both constraints for: '+incomplete.join(', ')+'. Eight decisions are needed before this verdict is ready for your 180-day plan.</div>'
+    : '<div class="vd-validate ok">All four pillars complete. These eight decisions are ready to shape your 180-day plan.</div>';
+  const sumEl=document.getElementById('vd-summary');if(sumEl)sumEl.innerHTML=tbl+valid;
+}
+
+/* ---------- PROGRESS ---------- */
+function updateProgress(){
+  const fields=document.querySelectorAll('[data-field]');let filled=0,total=0;
+  fields.forEach(f=>{if(f.type==='range')return;total++;if((f.value||'').trim()!=='')filled++;});
+  const pct=total?Math.round(filled/total*100):0;
+  const pf=document.getElementById('progressFill');if(pf)pf.style.width=pct+'%';
+  const pe=document.getElementById('pct');if(pe)pe.textContent=pct+'%';
+  const cp=document.getElementById('cc-pct');if(cp)cp.textContent=pct+'%';
+}
+
+/* ---------- BIND + RESTORE ---------- */
+function bind(){
+  document.querySelectorAll('[data-field]').forEach(f=>{
+    const id=f.dataset.field;
+    if(state[id]!==undefined&&state[id]!==''){
+      f.value=state[id];
+      if(f.type==='range'){const k=f.dataset.anchor;document.getElementById('sv-'+(k==='hold'?'hold':k)+'-d').textContent=f.value;document.getElementById('anchor-'+k).innerHTML='<b>'+f.value+'</b> &middot; '+nearestAnchor(ANCHORS[k],+f.value);}
+    }
+    if(f.type==='range')return; // handled by onScore
+    f.addEventListener('input',()=>{state[id]=f.value;flagSaving();updateProgress();});
+  });
+  // init range displays/anchors at default
+  document.querySelectorAll('input[type=range]').forEach(r=>{const k=r.dataset.anchor;if(!document.getElementById('anchor-'+k).innerHTML){document.getElementById('anchor-'+k).innerHTML='<b>'+r.value+'</b> &middot; '+nearestAnchor(ANCHORS[k],+r.value);}});
+  calcGap();updateProgress();
+}
+
+/* ---------- FLOOR PLAN ---------- */
+function esc(s){return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function escAttr(s){return esc(s).replace(/"/g,'&quot;');}
+function fmt2(n){return (CURSYM[CUR]||'$')+(+n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+
+function calcMRR(){
+  const el=document.querySelector('[data-field="fp-mrr"]');const mrr=+((el&&el.value)||0);
+  state['fp-mrr']=mrr||'';
+  const put=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+  if(mrr>0){const daily=mrr*12/365;put('mrr-monthly',fmt2(mrr));put('mrr-weekly',fmt2(mrr*12/52));put('mrr-daily',fmt2(daily));put('mrr-hourly',fmt2(daily/24));}
+  else{put('mrr-monthly','\u2014');put('mrr-weekly','\u2014');put('mrr-daily','\u2014');put('mrr-hourly','\u2014');}
+  flagSaving();updateProgress();
+}
+
+const PRI_PILLARS=[
+  {id:'influence',name:'INFLUENCE',label:'Messaging and positioning',flabel:'Influence Focus',
+   text:'Choose the three messaging and positioning priorities that will most improve buyer understanding, differentiation and demand.',
+   opts:['Clarify ideal buyer','Strengthen positioning','Refine primary buyer problem','Improve offer messaging','Create a clearer positioning statement','Strengthen differentiation','Develop a stronger point of view','Define the core buyer belief','Simplify the message','Improve message-to-offer alignment','Strengthen proof and credibility','Improve conversion messaging','Create repeatable core messages','Stop diluting the message','Other']},
+  {id:'visibility',name:'VISIBILITY',label:'Content and marketing',flabel:'Visibility Focus',
+   text:'Choose the three content and marketing priorities that will most improve reach, consistency and movement towards your offers.',
+   opts:['Increase audience reach','Improve lead generation','Build a weekly content system','Strengthen content consistency','Improve content-to-offer pathways','Create more attraction content','Create more nurture content','Create more positioning content','Create more conversion content','Strengthen calls to action','Improve platform strategy','Repurpose content more effectively','Strengthen email marketing','Improve audience nurture','Use content data more effectively','Build a recognisable content direction','Reduce content creation time','Other']},
+  {id:'cash',name:'CASH',label:'Sales ecosystem',flabel:'Cash Focus',
+   text:'Choose the three sales priorities that will most improve lead conversion, recurring revenue and cash flow.',
+   opts:['Increase qualified leads','Increase sales conversations','Improve offer conversion','Strengthen the sales pathway','Simplify the offer suite','Improve follow-up','Strengthen sales messaging','Increase recurring revenue','Improve retention and renewals','Create an evergreen sales pathway','Improve launch performance','Increase average order value','Add an upsell or downsell','Improve pricing or packaging','Strengthen the nurture-to-sale process','Improve sales tracking','Create more consistent cash flow','Build a stronger referral system','Other']},
+  {id:'subconscious',name:'SUBCONSCIOUS MASTERY',label:'Fears, identity and capacity',flabel:'Subconscious Mastery Focus',
+   text:'Choose the three internal priorities that will most improve your ability to execute, sustain growth and hold greater responsibility.',
+   opts:['Strengthen self-trust','Increase visibility capacity','Increase capacity to receive money','Increase capacity to hold responsibility','Improve emotional regulation','Reduce perfectionism','Reduce overthinking and indecision','Stop abandoning strategies too early','Sustain momentum for longer','Build a stronger leadership identity','Release fear of judgement','Release fear of failure','Release fear of success','Improve consistency through uncertainty','Stop creating chaos during stability','Strengthen decision-making','Stop relying on urgency','Reinforce the next-level identity','Increase capacity to hold more clients','Increase capacity to maintain success','Other']}
+];
+const PRI_SUB=['The most important focus within this pillar.','The second most important focus within this pillar.','The third most important focus within this pillar.'];
+function initPri(){
+  let d=state['fp-pri2'];
+  if(!d||typeof d!=='object'||Array.isArray(d))d={};
+  PRI_PILLARS.forEach(p=>{if(!Array.isArray(d[p.id])||d[p.id].length!==3)d[p.id]=[{focus:'',custom:'',notes:''},{focus:'',custom:'',notes:''},{focus:'',custom:'',notes:''}];});
+  state['fp-pri2']=d;return d;
+}
+function renderPriority(){
+  const host=document.getElementById('priority-rows');if(!host)return;
+  const d=initPri();
+  host.innerHTML=PRI_PILLARS.map(p=>{
+    const arr=d[p.id];
+    const chosen=arr.map(x=>x.focus).filter(f=>f&&f!=='Other');
+    const blocks=arr.map((x,i)=>{
+      const optList=['<option value="">Select a focus</option>'].concat(
+        p.opts.filter(o=>o===x.focus||o==='Other'||!chosen.includes(o))
+              .map(o=>'<option value="'+escAttr(o)+'"'+(o===x.focus?' selected':'')+'>'+esc(o)+'</option>')
+      ).join('');
+      const custom=(x.focus==='Other')?'<input class="prio-custom" type="text" placeholder="Name your focus" value="'+escAttr(x.custom||'')+'" oninput="onFocusCustom(\''+p.id+'\','+i+',this.value)">':'';
+      return '<div class="prio-block'+(i===0?' p1':'')+'">'
+        +'<div class="prio-head"><span class="prio-num">Priority '+(i+1)+'</span><span class="prio-sub">'+PRI_SUB[i]+'</span></div>'
+        +'<label class="prio-flabel">'+esc(p.flabel)+'</label>'
+        +'<select onchange="onFocusChange(\''+p.id+'\','+i+',this.value)">'+optList+'</select>'
+        +custom
+        +'<label class="prio-flabel" style="margin-top:13px">Notes: What needs to change, strengthen or be built within this focus?</label>'
+        +'<textarea oninput="onFocusNotes(\''+p.id+'\','+i+',this.value)">'+esc(x.notes||'')+'</textarea>'
+        +'</div>';
+    }).join('');
+    return '<div class="block-card pillar-card">'
+      +'<div class="pillar-card-name serif">'+esc(p.name)+'</div>'
+      +'<div class="pillar-card-label">'+esc(p.label)+'</div>'
+      +'<div class="bc-help" style="margin-top:8px;margin-bottom:0">'+esc(p.text)+'</div>'
+      +'<div class="prio-stack">'+blocks+'</div>'
+      +'</div>';
+  }).join('');
+}
+function priGet(pillarId,i){const d=initPri();return d[pillarId][i];}
+function onFocusChange(pillarId,i,v){const o=priGet(pillarId,i);o.focus=v;if(v!=='Other')o.custom='';flagSaving();renderPriority();}
+function onFocusCustom(pillarId,i,v){priGet(pillarId,i).custom=v;flagSaving();}
+function onFocusNotes(pillarId,i,v){priGet(pillarId,i).notes=v;flagSaving();}
+
+const TIP_TEXT='<b>Revenue Event:</b> anything contributing to revenue across the next six months, such as a waitlist, email newsletter, group coaching, new product, lead magnet, evergreen offer, membership, upsell, partnership, private sales activity or nurture activity tied to sales.<br><br><b>Launch Campaign:</b> a specific planned launch, promotion or enrolment campaign for an offer, with a clear campaign period and revenue goal.';
+function toggleTip(btn){const t=btn.parentElement;const open=t.classList.contains('open');document.querySelectorAll('.tip.open').forEach(x=>x.classList.remove('open'));if(!open)t.classList.add('open');}
+document.addEventListener('click',function(e){if(!e.target.closest('.tip'))document.querySelectorAll('.tip.open').forEach(x=>x.classList.remove('open'));});
+
+function evtArr(){
+  if(!Array.isArray(state['fp-events'])){
+    const merged=[];
+    (Array.isArray(state['fp-revenue'])?state['fp-revenue']:[]).forEach(e=>merged.push({type:'Revenue Event',name:e.name,offer:e.offer,date:e.freq,goal:e.goal,notes:e.notes}));
+    (Array.isArray(state['fp-launch'])?state['fp-launch']:[]).forEach(e=>merged.push({type:'Launch Campaign',name:e.name,offer:e.offer,date:e.date,sales:e.sales,goal:e.goal,notes:e.notes}));
+    state['fp-events']=merged;
+  }
+  return state['fp-events'];
+}
+function fld(i,key,label,t){
+  const full=(t==='area')?' full':'';
+  const ev=evtArr()[i]||{};
+  const ctl=(t==='area')
+    ? '<textarea oninput="updateEvent('+i+',\''+key+'\',this.value)">'+esc(ev[key]||'')+'</textarea>'
+    : '<input type="'+(t==='num'?'number':'text')+'"'+(t==='num'?' placeholder="0"':'')+' value="'+escAttr(ev[key]||'')+'" oninput="updateEvent('+i+',\''+key+'\',this.value)">';
+  return '<div class="evt-field'+full+'"><label>'+label+'</label>'+ctl+'</div>';
+}
+function renderEvents(){
+  const host=document.getElementById('events-list');if(!host)return;
+  const arr=evtArr();
+  if(!arr.length){host.innerHTML='<div class="evt-empty">No events added yet.</div>';recalcTotals();return;}
+  host.innerHTML=arr.map((ev,i)=>{
+    const isLaunch=ev.type==='Launch Campaign';
+    const typeOpts=['Revenue Event','Launch Campaign'].map(o=>'<option'+(ev.type===o?' selected':'')+'>'+o+'</option>').join('');
+    let f='';
+    f+='<div class="evt-field"><label>Event Type<span class="tip"><button type="button" class="tip-q" onclick="toggleTip(this)" aria-label="What is the difference?">?</button><span class="tip-box">'+TIP_TEXT+'</span></span></label><select onchange="updateEventType('+i+',this.value)"><option value="">Select event type</option>'+typeOpts+'</select></div>';
+    f+=fld(i,'name','Event Name','text');
+    f+=fld(i,'offer','Offer','text');
+    f+=fld(i,'date','Date / Month / Timing','text');
+    f+=fld(i,'goal','Revenue Goal','num');
+    if(isLaunch)f+=fld(i,'sales','Sales Goal','text');
+    f+=fld(i,'notes','Notes','area');
+    return '<div class="evt-card"><div class="evt-top"><button class="evt-del" title="Delete" onclick="deleteEvent('+i+')">&times;</button></div><div class="evt-grid">'+f+'</div></div>';
+  }).join('');
+  recalcTotals();
+}
+function addEvent(){evtArr().push({type:''});flagSaving();renderEvents();}
+function deleteEvent(i){evtArr().splice(i,1);flagSaving();renderEvents();}
+function updateEvent(i,key,val){const arr=evtArr();if(arr[i])arr[i][key]=val;if(key==='goal')recalcTotals();flagSaving();}
+function updateEventType(i,val){const arr=evtArr();if(arr[i])arr[i].type=val;flagSaving();renderEvents();}
+function recalcTotals(){
+  const total=evtArr().reduce((a,e)=>a+(+(e.goal||0)||0),0);
+  const put=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+  put('events-total',total?fmt(total):'\u2014');
+  put('combined-total',total?fmt(total):'\u2014');
+}
+function renderFloorplan(){calcMRR();renderPriority();renderEvents();recalcTotals();}
+
+/* ---------- RESET (two-tap inline confirm, works without browser popups) ---------- */
+let _resetTimer=null;
+function armReset(btn,label){
+  document.querySelectorAll('.reset-mini,.reset-all').forEach(b=>{if(b!==btn){b.classList.remove('armed');b.textContent=b.dataset.label||b.textContent;}});
+  if(!btn.dataset.label)btn.dataset.label=btn.textContent;
+  btn.classList.add('armed');btn.textContent=label;
+  clearTimeout(_resetTimer);
+  _resetTimer=setTimeout(()=>{btn.classList.remove('armed');btn.textContent=btn.dataset.label;},4000);
+}
+function disarm(btn){if(btn){clearTimeout(_resetTimer);btn.classList.remove('armed');btn.textContent=btn.dataset.label||'Reset page';}}
+function resetPage(id,btn){
+  const sec=document.querySelector('[data-section="'+id+'"]');if(!sec)return;
+  if(btn&&!btn.classList.contains('armed')){armReset(btn,'Tap again to reset');return;}
+  disarm(btn);
+  sec.querySelectorAll('[data-field]').forEach(f=>{
+    const k=f.dataset.field;
+    if(k==='num-cur')return; // keep currency preference
+    if(f.type==='range'){f.value=5;delete state[k];const a=f.dataset.anchor;const d=document.getElementById('sv-'+(a==='hold'?'hold':a)+'-d');if(d)d.textContent='5';const an=document.getElementById('anchor-'+a);if(an)an.innerHTML='<b>5</b> &middot; '+nearestAnchor(ANCHORS[a],5);}
+    else{f.value='';delete state[k];}
+  });
+  saveState(state);flagSaving();
+  if(id==='number')calcGap();
+  if(id==='floorplan'){delete state['fp-priority'];delete state['fp-pri2'];delete state['fp-events'];delete state['fp-revenue'];delete state['fp-launch'];renderFloorplan();}
+  if(id==='verdict')renderVerdict();
+  updateProgress();
+  if(btn){btn.textContent='Page cleared';setTimeout(()=>{btn.textContent=btn.dataset.label||'Reset page';},1600);}
+}
+function resetAll(){
+  state={};try{localStorage.removeItem(KEY);}catch(e){mem={};}
+  document.querySelectorAll('[data-field]').forEach(f=>{if(f.type==='range')f.value=5;else f.value='';});
+  document.querySelectorAll('input[type=range]').forEach(r=>onScore(r));
+  calcGap();renderFloorplan();renderVerdict();updateProgress();go('welcome');
+}
+
+/* ---------- MENU ---------- */
+function toggleMenu(){document.getElementById('sidebar').classList.toggle('open');document.querySelector('.scrim').classList.toggle('show');}
+function closeMenu(){document.getElementById('sidebar').classList.remove('open');document.querySelector('.scrim').classList.remove('show');}
+
+/* ---------- EXPORT PDF ---------- */
+const EXPORT_MAP=[
+  {title:'Pillar One: Influence',scores:[['score-influence','Influence']],items:[
+    ['inf-rev-moved','Review: messages that drove enquiries or sales'],['inf-rev-agree','Review: attention but no commercial action'],
+    ['inf-rev-offer','Review: offer promoted most'],['inf-rev-words','Review: exact buyer language'],
+    ['inf-aud-clear','Audit: clarity within seconds'],['inf-aud-known','Audit: known for vs evidence'],
+    ['inf-aud-belief','Audit: belief buyer must adopt'],['inf-aud-diff','Audit: what makes you different'],
+    ['inf-constraint','Primary constraint'],['inf-an-strengthen','Message to strengthen'],['inf-an-stop','Message to stop diluting with'],
+    ['inf-out-positioning','Output: positioning statement'],['inf-out-problem','Output: primary buyer problem'],
+    ['inf-out-belief','Output: core belief'],['inf-out-messages','Output: three messages to repeat'],['inf-out-stop','Output: pattern to stop']]},
+  {title:'Pillar Two: Visibility',scores:[['score-visibility','Visibility']],items:[
+    ['vis-rev-reach','Review: top three by reach'],['vis-rev-leads','Review: top three by leads or sales'],
+    ['vis-rev-freq','Review: frequency and platforms'],['vis-rev-stopped','Review: what stopped'],['vis-rev-continued','Review: what kept working'],
+    ['vis-aud-role','Audit: platform commercial role'],['vis-aud-path','Audit: content to lead or sale'],
+    ['vis-aud-coverage','Audit: content coverage'],['vis-aud-pressure','Audit: survives a hard week'],['vis-aud-owned','Audit: owned channel'],
+    ['vis-constraint','Primary constraint'],['vis-an-weakest','Weakest stage'],['vis-an-system','System to build or simplify'],
+    ['vis-out-platform','Output: primary platform'],['vis-out-owned','Output: owned channel'],['vis-out-pathway','Output: content-to-sale pathway'],
+    ['vis-out-series','Output: three content series'],['vis-out-plan','Output: weekly content plan'],['vis-out-metric','Output: commercial metric']]},
+  {title:'Pillar Three: Cash',scores:[['score-cash','Cash']],items:[
+    ['cash-rev-month','Review: revenue by month'],['cash-rev-offer','Review: revenue by offer'],
+    ['cash-rev-mech','Review: sales mechanism per sale'],['cash-rev-recurring','Review: recurring vs new'],
+    ['cash-rev-best','Review: best return offer'],['cash-rev-under','Review: underperformer'],
+    ['cash-aud-core','Audit: core offer'],['cash-aud-roles','Audit: offer roles'],['cash-aud-path','Audit: lead to buyer and drop-off'],
+    ['cash-aud-math','Audit: sales and leads required'],['cash-aud-recurring','Audit: revenue if you stop launching'],['cash-aud-delivery','Audit: delivery capacity'],
+    ['cash-constraint','Primary constraint'],['cash-an-loss','Stage where revenue is lost'],['cash-an-decision','Commercial decision'],
+    ['cash-out-goal','Output: six-month revenue goal'],['cash-out-offer','Output: core offer'],['cash-out-sales','Output: monthly sales'],
+    ['cash-out-leads','Output: monthly leads'],['cash-out-mech','Output: sales mechanism'],['cash-out-grow','Output: offer to grow'],
+    ['cash-out-refine','Output: offer to refine or retire'],['cash-out-leak','Output: revenue leak to fix'],['cash-out-campaign','Output: campaign priority']]},
+  {title:'Pillar Four: Subconscious Mastery',scores:[['score-hold','Hold Point']],items:[
+    ['sub-rev-owner','Review: acted like the owner I am becoming'],['sub-rev-fear','Review: fear or self-doubt drove a decision'],
+    ['sub-rev-delayed','Review: opportunities delayed or complicated'],['sub-rev-triggers','Review: strongest emotional triggers'],
+    ['sub-rev-momentum','Review: pattern when gaining momentum'],['sub-rev-slowed','Review: pattern when results slowed'],
+    ['sub-rev-expanded','Review: capacity successfully expanded'],['sub-rev-returned','Review: returned to an old version'],
+    ['sub-aud-require','Audit: what the next level requires'],['sub-aud-resistance','Audit: where resistance shows up'],
+    ['sub-aud-fear','Audit: fear with the greatest influence'],['sub-aud-belief','Audit: belief about more visibility or success'],
+    ['sub-aud-version','Audit: version of self making decisions'],['sub-aud-unsafe','Audit: want it but do not feel safe having it'],
+    ['sub-aud-avoidance','Audit: avoidance dressed as optimisation'],['sub-aud-emotions','Audit: emotions you can hold'],['sub-aud-normal','Audit: what feels normal vs unsafe'],
+    ['sub-constraint','Primary constraint'],['sub-an-interrupt','Pattern to interrupt'],['sub-an-oldid','Old identity to stop reinforcing'],
+    ['sub-an-fear','Fear to stop organising around'],['sub-an-emotion','Capacity to increase'],['sub-an-standard','New standard'],['sub-an-decision','Decision made differently'],
+    ['sub-out-release','Output: old identity to release'],['sub-out-reinforce','Output: new identity to reinforce'],['sub-out-belief','Output: core belief to strengthen'],
+    ['sub-out-fear','Output: fear no longer allowed to decide'],['sub-out-behaviours','Output: three behaviours that prove the new identity'],['sub-out-capacity','Output: capacity to expand'],
+    ['sub-out-practice','Output: regulation or reprogramming practice'],['sub-out-notice','Plan: when I notice myself'],['sub-out-insteadof','Plan: instead of'],['sub-out-iwill','Plan: I will'],
+    ['sub-out-identity','Output: identity statement'],['sub-out-stop','Output: pattern to stop']]},
+  {title:'The Number: Capacity Gap',scores:[],items:[
+    ['num-best','Best month'],['num-total','Six-month total'],['num-low','Lowest month'],['num-iln','Ideal Lifestyle Number (ILN)'],['num-urs','Unconscious Revenue Standard (URS)'],['num-best-did','What you did in your best month'],['num-low-did','What you did in your lowest month']],number:true},
+  {title:'The Verdict',scores:[['score-influence','Influence'],['score-visibility','Visibility'],['score-cash','Cash'],['score-hold','Subconscious Mastery']],items:[
+    ['vd-inf-strat','Influence \u00b7 #1 Strategic Constraint'],['vd-inf-strat-notes','Influence \u00b7 Strategic notes'],
+    ['vd-inf-sub','Influence \u00b7 #1 Subconscious Constraint'],['vd-inf-sub-notes','Influence \u00b7 Subconscious notes'],
+    ['vd-vis-strat','Visibility \u00b7 #1 Strategic Constraint'],['vd-vis-strat-notes','Visibility \u00b7 Strategic notes'],
+    ['vd-vis-sub','Visibility \u00b7 #1 Subconscious Constraint'],['vd-vis-sub-notes','Visibility \u00b7 Subconscious notes'],
+    ['vd-cash-strat','Cash \u00b7 #1 Strategic Constraint'],['vd-cash-strat-notes','Cash \u00b7 Strategic notes'],
+    ['vd-cash-sub','Cash \u00b7 #1 Subconscious Constraint'],['vd-cash-sub-notes','Cash \u00b7 Subconscious notes'],
+    ['vd-sub-strat','Subconscious Mastery \u00b7 #1 Strategic Constraint'],['vd-sub-strat-notes','Subconscious Mastery \u00b7 Strategic notes'],
+    ['vd-sub-sub','Subconscious Mastery \u00b7 #1 Subconscious Constraint'],['vd-sub-sub-notes','Subconscious Mastery \u00b7 Subconscious notes'],
+    ['vd-first','Pillar I will address first'],['vd-first-notes','Why this pillar comes first']]},
+  {title:'6-Month Plan',scores:[],items:[
+    ['fp-mrr','Target MRR']],floorplan:true}
+];
+function val(id){const el=document.querySelector('[data-field="'+id+'"]');return el?(el.value||'').trim():'';}
+function groupFor(id){
+  if(/-rev-/.test(id))return 'Review';
+  if(/-aud-/.test(id))return 'Audit';
+  if(/-an-/.test(id)||/-constraint$/.test(id))return 'Analysis';
+  if(/-out-/.test(id))return 'Required output';
+  return '';
+}
+function cleanLabel(l){return l.replace(/^(Review|Audit|Analysis|Output)\s*:\s*/i,'');}
+function pillarItems(kw){const s=EXPORT_MAP.find(x=>x.title.indexOf(kw)>-1);return s?s.items:[];}
+function prettyDate(d){d=d||new Date();const m=['January','February','March','April','May','June','July','August','September','October','November','December'];return d.getDate()+' '+m[d.getMonth()]+' '+d.getFullYear();}
+function dateStamp(d){d=d||new Date();const p=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());}
+
+const PILLAR_DEF={
+  influence:{kw:'Influence',name:'Influence',score:'score-influence'},
+  visibility:{kw:'Visibility',name:'Visibility',score:'score-visibility'},
+  cash:{kw:'Cash',name:'Cash',score:'score-cash'},
+  subconscious:{kw:'Subconscious',name:'Subconscious Mastery',score:'score-hold'}
+};
+function scoresRows(){return [['Influence','score-influence'],['Visibility','score-visibility'],['Cash','score-cash'],['Subconscious Mastery','score-hold']].map(r=>[r[0],(state[r[1]]!==undefined?state[r[1]]:'-')+' / 10']);}
+function pillarBlocks(key,withDesc){
+  const p=PILLAR_DEF[key];const out=[{t:'h1',text:p.name}];
+  if(withDesc){const dq=document.querySelector('[data-section="'+key+'"] .core-diagnostic p');if(dq&&dq.textContent.trim())out.push({t:'desc',text:dq.textContent.trim()});}
+  if(state[p.score]!==undefined)out.push({t:'kv',label:p.name+' score',value:state[p.score]+' / 10'});
+  let lastG=null;
+  pillarItems(p.kw).forEach(it=>{const v=val(it[0]);if(!v)return;const g=groupFor(it[0]);if(g&&g!==lastG){out.push({t:'h2',text:g});lastG=g;}out.push({t:'qa',label:cleanLabel(it[1]),value:v});});
+  return out;
+}
+function numberBlocks(){
+  const out=[];const best=+(val('num-best')||0),urs=+(val('num-urs')||0),low=+(val('num-low')||0),iln=+(val('num-iln')||0),tot6=+(val('num-total')||0),bd=val('num-best-did'),ld=val('num-low-did');
+  if(best||urs||low||iln||tot6||bd||ld){
+    out.push({t:'h1',text:'The Number \u2014 Capacity Gap'});
+    if(best)out.push({t:'kv',label:'Best month',value:fmt(best)});
+    if(tot6)out.push({t:'kv',label:'Six-month total',value:fmt(tot6)});
+    if(low)out.push({t:'kv',label:'Lowest month',value:fmt(low)});
+    if(iln)out.push({t:'kv',label:'Ideal Lifestyle Number',value:fmt(iln)});
+    if(urs)out.push({t:'kv',label:'Unconscious Revenue Standard',value:fmt(urs)});
+    if(best&&urs)out.push({t:'kv',label:'Capacity gap',value:fmt(Math.max(best-urs,0))});
+    if(bd)out.push({t:'qa',label:'What you did in your best month',value:bd});
+    if(ld)out.push({t:'qa',label:'What you did in your lowest month',value:ld});
+  }
+  return out;
+}
+function verdictBlocks(){
+  const out=[{t:'h1',text:'The Verdict'},{t:'scores',rows:scoresRows()}];
+  const VD=[{n:'Influence',s:'vd-inf-strat',sn:'vd-inf-strat-notes',u:'vd-inf-sub',un:'vd-inf-sub-notes'},{n:'Visibility',s:'vd-vis-strat',sn:'vd-vis-strat-notes',u:'vd-vis-sub',un:'vd-vis-sub-notes'},{n:'Cash',s:'vd-cash-strat',sn:'vd-cash-strat-notes',u:'vd-cash-sub',un:'vd-cash-sub-notes'},{n:'Subconscious Mastery',s:'vd-sub-strat',sn:'vd-sub-strat-notes',u:'vd-sub-sub',un:'vd-sub-sub-notes'}];
+  VD.forEach(v=>{const st=val(v.s),su=val(v.u),sn=val(v.sn),un=val(v.un);if(st||su||sn||un){out.push({t:'h2',text:v.n});if(st)out.push({t:'kv',label:'#1 Strategic constraint',value:st});if(sn)out.push({t:'qa',label:'Strategic notes',value:sn});if(su)out.push({t:'kv',label:'#1 Subconscious constraint',value:su});if(un)out.push({t:'qa',label:'Subconscious notes',value:un});}});
+  const first=val('vd-first'),fwhy=val('vd-first-notes');
+  if(first)out.push({t:'kv',label:'Pillar to address first',value:first});
+  if(fwhy)out.push({t:'qa',label:'Why this pillar comes first',value:fwhy});
+  return out;
+}
+function floorplanBlocks(){
+  const out=[];const mrr=+(val('fp-mrr')||0);
+  out.push({t:'h1',text:'Target MRR'});
+  if(mrr>0){const dd=mrr*12/365;out.push({t:'kv',label:'Monthly',value:fmt2(mrr)},{t:'kv',label:'Weekly',value:fmt2(mrr*12/52)},{t:'kv',label:'Daily',value:fmt2(dd)},{t:'kv',label:'Hourly',value:fmt2(dd/24)});}else out.push({t:'note',text:'No target MRR set.'});
+  const pdata=initPri();const PRI_NAMES=[['influence','Influence'],['visibility','Visibility'],['cash','Cash'],['subconscious','Subconscious Mastery']];
+  if(PRI_NAMES.some(r=>pdata[r[0]].some(x=>x&&(x.focus||x.notes)))){
+    out.push({t:'h1',text:'Pillar Priority Plan'});
+    PRI_NAMES.forEach(r=>{const arr=pdata[r[0]];if(arr.some(x=>x&&(x.focus||x.notes))){out.push({t:'h2',text:r[1]});arr.forEach((x,i)=>{if(x&&(x.focus||x.notes)){const f=(x.focus==='Other'&&x.custom)?x.custom:(x.focus||'Not selected');out.push({t:'kv',label:'Priority '+(i+1),value:f});if(x.notes)out.push({t:'qa',label:'Notes',value:x.notes});}});}});
+  }
+  const evts=Array.isArray(state['fp-events'])?state['fp-events']:[];
+  out.push({t:'h1',text:'Revenue / Launch Events'});
+  if(evts.length){evts.forEach((e,i)=>{const rows=[];if(e.type)rows.push(['Type',e.type]);if(e.name)rows.push(['Name',e.name]);if(e.offer)rows.push(['Offer',e.offer]);if(e.date)rows.push(['Timing',e.date]);if(e.goal)rows.push(['Revenue goal',fmt(+e.goal||0)]);if(e.sales)rows.push(['Sales goal',e.sales]);if(e.notes)rows.push(['Notes',e.notes]);out.push({t:'event',index:i+1,rows:rows});});}else out.push({t:'note',text:'No events added yet.'});
+  const totalRev=evts.reduce((a,e)=>a+(+(e.goal||0)||0),0);
+  out.push({t:'total',label:'Total projected revenue for the next six months',value:fmt(totalRev)});
+  return out;
+}
+function buildPlan(){
+  let B=[{t:'header',name:val('member-name'),date:prettyDate()}];
+  ['influence','visibility','cash','subconscious'].forEach(k=>{B=B.concat(pillarBlocks(k,false));});
+  B.push({t:'h1',text:'Pillar scores'},{t:'scores',rows:scoresRows()});
+  B=B.concat(numberBlocks(),verdictBlocks(),floorplanBlocks());
+  return B;
+}
+
+function renderText(B){
+  let o='WMHQ BI-ANNUAL VIP WORKSHOP\nSix-Month Review and Plan\n';
+  B.forEach(b=>{
+    if(b.t==='header'){if(b.name)o+='Prepared for: '+b.name+'\n';o+='Date: '+b.date+'\n';}
+    else if(b.t==='h1')o+='\n\n=== '+b.text.toUpperCase()+' ===\n';
+    else if(b.t==='h2')o+='\n-- '+b.text+' --\n';
+    else if(b.t==='desc')o+=b.text+'\n';
+    else if(b.t==='kv')o+=b.label+': '+b.value+'\n';
+    else if(b.t==='qa')o+='\n'+b.label+':\n'+b.value+'\n';
+    else if(b.t==='scores')b.rows.forEach(r=>o+=r[0]+': '+r[1]+'\n');
+    else if(b.t==='event'){o+='\nEvent '+b.index+'\n';b.rows.forEach(r=>o+='  - '+r[0]+': '+r[1]+'\n');}
+    else if(b.t==='total')o+='\n'+b.label.toUpperCase()+': '+b.value+'\n';
+    else if(b.t==='note')o+=b.text+'\n';
+  });
+  return o.trim()+'\n';
+}
+
+function showExportMsg(text,cls){const e=document.getElementById('exportMsg');if(!e)return;e.textContent=text||'';e.className='export-msg'+(cls?' '+cls:'');}
+
+let _pdfBusy=false;
+function renderBlocksToPDF(B,filename){
+  const jsPDF=window.jspdf.jsPDF;
+  const doc=new jsPDF({unit:'pt',format:'a4'});
+  const PW=doc.internal.pageSize.getWidth(),PH=doc.internal.pageSize.getHeight();
+  const M=46,CW=PW-M*2;let y=M;
+  const merlot=[123,29,29],ink=[42,42,42],soft=[90,83,80];
+  function footer(){doc.setFont('helvetica','normal');doc.setFontSize(6.5);doc.setTextColor(170,160,155);doc.text(doc.splitTextToSize('This work is the sole property of Jessica Pinili. Not for sharing, distribution, duplication, sale, licensing or derivative works.',CW),M,PH-22);}
+  function addPage(){footer();doc.addPage();y=M;}
+  function need(h){if(y+h>PH-44)addPage();}
+  const hdr=B[0]||{};
+  doc.setFillColor(merlot[0],merlot[1],merlot[2]);doc.rect(0,0,PW,134,'F');
+  doc.setTextColor(241,230,226);doc.setFont('times','normal');doc.setFontSize(12);doc.text('WOMAN MASTERY HQ',M,44);
+  doc.setFont('times','italic');doc.setFontSize(27);doc.setTextColor(255,255,255);doc.text('Bi-Annual VIP Workshop',M,80);
+  doc.setFont('helvetica','normal');doc.setFontSize(10.5);doc.setTextColor(242,198,208);doc.text((hdr.sub||'Six-Month Review and Plan')+'   \u00b7   '+hdr.date,M,104);
+  if(hdr.name){doc.setFontSize(10);doc.text('Prepared for '+hdr.name,M,121);}
+  y=162;
+  B.slice(1).forEach(function(b){
+    if(b.t==='h1'){
+      if(y>PH-170)addPage(); else if(y>170)y+=16;
+      need(42);
+      doc.setFont('times','normal');doc.setFontSize(18);doc.setTextColor(merlot[0],merlot[1],merlot[2]);doc.text(b.text,M,y+14);y+=24;
+      doc.setDrawColor(225,221,216);doc.line(M,y,PW-M,y);y+=16;
+    } else if(b.t==='desc'){
+      need(20);doc.setFont('helvetica','italic');doc.setFontSize(10.5);doc.setTextColor(soft[0],soft[1],soft[2]);
+      doc.splitTextToSize(String(b.text),CW).forEach(function(ln){need(15);doc.text(ln,M,y+10);y+=15;});y+=8;
+    } else if(b.t==='h2'){
+      need(26);y+=6;doc.setFont('helvetica','bold');doc.setFontSize(9.5);doc.setTextColor(merlot[0],merlot[1],merlot[2]);doc.text(b.text.toUpperCase(),M,y+8);y+=18;
+    } else if(b.t==='kv'){
+      need(18);doc.setFont('helvetica','bold');doc.setFontSize(10.5);doc.setTextColor(ink[0],ink[1],ink[2]);
+      const lbl=b.label+':  ';const lw=doc.getTextWidth(lbl);doc.text(lbl,M,y+10);
+      doc.setFont('helvetica','normal');doc.setTextColor(soft[0],soft[1],soft[2]);
+      const vl=doc.splitTextToSize(String(b.value),CW-lw);doc.text(vl[0]||'',M+lw,y+10);y+=15;
+      for(let i=1;i<vl.length;i++){need(14);doc.text(vl[i],M+lw,y+10);y+=14;}
+      y+=2;
+    } else if(b.t==='qa'){
+      need(30);y+=2;doc.setFont('helvetica','bold');doc.setFontSize(10.5);doc.setTextColor(ink[0],ink[1],ink[2]);
+      doc.splitTextToSize(b.label,CW).forEach(function(ln){need(15);doc.text(ln,M,y+10);y+=15;});
+      doc.setFont('helvetica','normal');doc.setTextColor(soft[0],soft[1],soft[2]);
+      String(b.value).split('\n').forEach(function(seg){doc.splitTextToSize(seg.length?seg:' ',CW-10).forEach(function(ln){need(14);doc.text(ln,M+10,y+9);y+=14;});});
+      y+=8;
+    } else if(b.t==='scores'){
+      need(20);b.rows.forEach(function(r){need(17);doc.setFont('helvetica','bold');doc.setFontSize(12);doc.setTextColor(merlot[0],merlot[1],merlot[2]);doc.text(String(r[1]),M,y+11);doc.setFont('helvetica','normal');doc.setFontSize(11);doc.setTextColor(soft[0],soft[1],soft[2]);doc.text('   '+r[0],M+46,y+11);y+=18;});y+=4;
+    } else if(b.t==='event'){
+      need(26);y+=4;doc.setFont('helvetica','bold');doc.setFontSize(10.5);doc.setTextColor(merlot[0],merlot[1],merlot[2]);doc.text('Event '+b.index,M,y+9);y+=15;doc.setFontSize(10);
+      b.rows.forEach(function(r){doc.setFont('helvetica','bold');doc.setTextColor(ink[0],ink[1],ink[2]);const lbl=r[0]+':  ';const lw=doc.getTextWidth(lbl);need(14);doc.text(lbl,M+10,y+9);doc.setFont('helvetica','normal');doc.setTextColor(soft[0],soft[1],soft[2]);const vl=doc.splitTextToSize(String(r[1]),CW-10-lw);doc.text(vl[0]||'',M+10+lw,y+9);y+=14;for(let i=1;i<vl.length;i++){need(13);doc.text(vl[i],M+10+lw,y+9);y+=13;}});
+      y+=4;
+    } else if(b.t==='total'){
+      need(60);y+=10;doc.setFillColor(merlot[0],merlot[1],merlot[2]);doc.roundedRect(M,y,CW,48,8,8,'F');
+      doc.setFont('helvetica','bold');doc.setFontSize(8.5);doc.setTextColor(242,198,208);doc.text(b.label.toUpperCase(),M+18,y+19);
+      doc.setFont('times','normal');doc.setFontSize(23);doc.setTextColor(255,255,255);doc.text(String(b.value),M+18,y+41);y+=60;
+    } else if(b.t==='note'){
+      need(18);doc.setFont('helvetica','italic');doc.setFontSize(10);doc.setTextColor(soft[0],soft[1],soft[2]);doc.text(b.text,M,y+9);y+=16;
+    }
+  });
+  footer();
+  doc.save(filename);
+}
+function _exportRun(btnId,buildFn,filename){
+  if(_pdfBusy)return;
+  const btn=document.getElementById(btnId);
+  if(!(window.jspdf&&window.jspdf.jsPDF)){if(btnId==='pdfBtn')showExportMsg('The PDF engine is still loading. Please try again in a moment.','err');else if(btn){const o=btn.innerHTML;btn.disabled=true;btn.textContent='PDF engine loading, try again';setTimeout(function(){btn.disabled=false;btn.innerHTML=o;},2400);}return;}
+  _pdfBusy=true;
+  const orig=btn?btn.innerHTML:'';if(btn){btn.disabled=true;btn.textContent='Preparing PDF...';}
+  if(btnId==='pdfBtn')showExportMsg('','');
+  setTimeout(function(){
+    let ok=true;
+    try{renderBlocksToPDF(buildFn(),filename);}catch(e){ok=false;}
+    _pdfBusy=false;
+    if(btn){btn.disabled=false;btn.innerHTML=orig;}
+    if(btnId==='pdfBtn'){showExportMsg(ok?'Your PDF has downloaded.':'Something went wrong generating the PDF. Please try again.',ok?'ok':'err');}
+    else if(!ok&&btn){btn.disabled=true;btn.textContent='Export failed. Try again';setTimeout(function(){btn.disabled=false;btn.innerHTML=orig;},2600);}
+  },40);
+}
+function nameSlug(){const n=val('member-name');return n?('-'+n.trim().replace(/[^A-Za-z0-9]+/g,'-').replace(/^-+|-+$/g,'')):'';}
+function generatePDF(){_exportRun('pdfBtn',buildPlan,'WMHQ-6-Month-ReviewPlan'+nameSlug()+'-'+dateStamp()+'.pdf');}
+function exportPDF(){generatePDF();}
+function _hdr(sub){return {t:'header',name:val('member-name'),date:prettyDate(),sub:sub};}
+function exportSection(key){
+  const MAP={
+    influence:{btn:'pe-influence',sub:'Influence',file:'Influence',build:function(){return [_hdr('Influence')].concat(pillarBlocks('influence',true));}},
+    visibility:{btn:'pe-visibility',sub:'Visibility',file:'Visibility',build:function(){return [_hdr('Visibility')].concat(pillarBlocks('visibility',true));}},
+    cash:{btn:'pe-cash',sub:'Cash',file:'Cash',build:function(){return [_hdr('Cash')].concat(pillarBlocks('cash',true));}},
+    subconscious:{btn:'pe-subconscious',sub:'Subconscious Mastery',file:'Subconscious-Mastery',build:function(){return [_hdr('Subconscious Mastery')].concat(pillarBlocks('subconscious',true));}},
+    verdict:{btn:'pe-verdict',sub:'The Verdict',file:'Verdict',build:function(){return [_hdr('The Verdict')].concat(verdictBlocks());}},
+    floorplan:{btn:'pe-floorplan',sub:'6-Month Plan',file:'6-Month-Plan',build:function(){return [_hdr('6-Month Plan'),{t:'h1',text:'6-Month Plan'}].concat(floorplanBlocks());}}
+  }[key];
+  if(!MAP)return;
+  _exportRun(MAP.btn,MAP.build,'WMHQ-'+MAP.file+nameSlug()+'-'+dateStamp()+'.pdf');
+}
+
+function copyForDocs(){
+  const text=renderText(buildPlan());
+  const done=function(){showExportMsg('Copied. Paste your full plan into Google Docs.','ok');const fb=document.getElementById('copyFallback');if(fb)fb.innerHTML='';};
+  const fail=function(){showExportMsg('Clipboard access was blocked. Select the text below and copy it manually.','err');const fb=document.getElementById('copyFallback');if(fb){fb.innerHTML='<textarea readonly></textarea>';const ta=fb.querySelector('textarea');ta.value=text;ta.focus();ta.select();}};
+  try{
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(fail);}
+    else{const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');document.body.removeChild(ta);ok?done():fail();}
+  }catch(e){fail();}
+}
+
+function openClearModal(){const m=document.getElementById('clearModal');if(m)m.classList.add('show');}
+function closeClearModal(){const m=document.getElementById('clearModal');if(m)m.classList.remove('show');}
+function confirmClear(){closeClearModal();resetAll();}
+
+/* ---------- LIVE TIMER (4:00 PM Brisbane, 25 June 2026, runs 4 hours) ---------- */
+function startTimer(){
+  const START=Date.UTC(2026,5,25,6,0,0);  // 4:00 PM Brisbane (UTC+10)
+  const END=Date.UTC(2026,5,25,10,0,0);    // 8:00 PM Brisbane
+  const numEl=document.getElementById('cc-timer');
+  const subEl=document.getElementById('cc-timer-sub');
+  const miniEl=document.getElementById('cc-timer-mini');
+  const pad=n=>String(n).padStart(2,'0');
+  function tick(){
+    if(!numEl&&!miniEl)return;
+    const now=Date.now();let rem,sub;
+    if(now<START){rem=END-START;sub='Begins 4:00 PM Brisbane, June 25';}
+    else if(now<END){rem=END-now;sub='of 4 hours remaining';}
+    else{rem=0;sub='Session complete';}
+    const ts=Math.max(Math.floor(rem/1000),0);
+    const clock=pad(Math.floor(ts/3600))+':'+pad(Math.floor(ts%3600/60))+':'+pad(ts%60);
+    if(numEl)numEl.textContent=clock;
+    if(subEl)subEl.textContent=sub;
+    if(miniEl)miniEl.textContent=clock;
+  }
+  tick();setInterval(tick,1000);
+}
+
+/* ---------- ACCESS GATE ---------- */
+const GATE_KEY='wmhq-vip-unlocked';
+const ACCESS_CODE='wmhq6month';
+function checkGate(){
+  let ok=false;try{ok=localStorage.getItem(GATE_KEY)==='1';}catch(e){}
+  const g=document.getElementById('gate');if(!g)return;
+  if(ok){g.style.display='none';}
+  else{const i=document.getElementById('gate-code');if(i)setTimeout(()=>i.focus(),60);}
+}
+function unlockGate(){
+  const inp=document.getElementById('gate-code'),err=document.getElementById('gate-err'),g=document.getElementById('gate');
+  const v=(inp.value||'').trim().toLowerCase();
+  if(v===ACCESS_CODE){
+    try{localStorage.setItem(GATE_KEY,'1');}catch(e){}
+    if(err)err.hidden=true;inp.classList.remove('bad');
+    g.classList.add('hide');setTimeout(()=>{g.style.display='none';},360);
+  }else{
+    if(err)err.hidden=false;inp.classList.add('bad');inp.focus();inp.select();
+  }
+}
+function gateKey(e){if(e.key==='Enter'){e.preventDefault();unlockGate();}}
+function logout(){
+  try{localStorage.removeItem(GATE_KEY);}catch(e){}
+  const g=document.getElementById('gate'),i=document.getElementById('gate-code'),err=document.getElementById('gate-err');
+  if(i){i.value='';i.classList.remove('bad');}
+  if(err)err.hidden=true;
+  if(g){g.style.display='flex';g.classList.remove('hide');}
+  window.scrollTo(0,0);
+  if(i)setTimeout(()=>i.focus(),60);
+}
+
+/* ---------- INIT ---------- */
+checkGate();
+bind();renderFloorplan();renderVerdict();go('welcome');startTimer();
+</script>
+</body>
+</html>
